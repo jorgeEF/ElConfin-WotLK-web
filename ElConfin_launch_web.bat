@@ -6,7 +6,7 @@ cd backend
 start cmd /k "npm run start"
 
 :: Volver al directorio raíz
-cd ..
+cd..
 
 :: Servir el frontend desde la carpeta build en el puerto 80
 echo Sirviendo el frontend en el puerto 80...
