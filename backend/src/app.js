@@ -23,6 +23,6 @@ app.use('/api/auth', authRoutes);
 // Configuración del puerto
 const port = process.env.PORT;
 
-app.listen(3000, '0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => {
     console.log(`Servidor escuchando en http://0.0.0.0:${port}`);
 });
