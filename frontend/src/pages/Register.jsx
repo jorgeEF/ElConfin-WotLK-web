@@ -5,12 +5,15 @@ export const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');  // Para mostrar errores
+  
+  // URL del backend
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/register', {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,8 +25,8 @@ export const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert(data.message); // Muestra el mensaje de éxito
-        setErrorMessage(''); // Limpiar el mensaje de error si el registro fue exitoso
+        alert(data.message); 
+        setErrorMessage('');
       } else {
         // Manejo de errores basado en el código de respuesta
         if (response.status === 409) {

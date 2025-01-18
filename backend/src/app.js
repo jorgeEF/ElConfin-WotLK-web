@@ -8,17 +8,21 @@ dotenv.config();
 
 // Crear aplicación Express
 const app = express();
+const FRONT_URL = process.env.FRONT_URL;
 
 // Middlewares
-app.use(cors());
-app.use(express.json()); // Para parsear JSON en el cuerpo de las solicitudes
+app.use(cors({
+  origin: FRONT_URL, // Permitir solo este origen
+  methods: ['GET', 'POST'], // Métodos permitidos
+}));
+app.use(express.json());
 
 // Rutas
 app.use('/api/auth', authRoutes);
 
 // Configuración del puerto
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
-app.listen(port, () => {
-  console.log(`Servidor corriendo en http://localhost:${port}`);
+app.listen(3000, '0.0.0.0', () => {
+    console.log(`Servidor escuchando en http://0.0.0.0:${port}`);
 });
