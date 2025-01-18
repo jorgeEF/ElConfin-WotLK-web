@@ -14,9 +14,9 @@ export const Menu = () => {
             <div className='col-md-5'> </div>
             <div className='col-md-4'> 
                 <div className='d-flex justify-content-end gap-3'>
-                    <Link to="/login">
+                    {/* <Link to="/login">
                     <button className='btn btn-success'>Iniciar sesión</button>
-                    </Link>
+                    </Link> */}
 
                     <Link to="/register">
                     <button className='btn btn-primary'>Registrarse</button>
