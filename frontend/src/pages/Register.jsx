@@ -4,7 +4,8 @@ export const Register = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');  // Para mostrar errores
+  const [okMessage, setOkMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   
   // URL del backend
   const API_URL = import.meta.env.VITE_API_URL;
@@ -25,21 +26,25 @@ export const Register = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert(data.message); 
-        setErrorMessage('');
+        setOkMessage(data.message);
+        setErrorMessage('');      
       } else {
         // Manejo de errores basado en el código de respuesta
         if (response.status === 409) {
           setErrorMessage('El nombre de usuario ya está en uso.');
+          setOkMessage('');
         } else if (response.status === 500) {
           setErrorMessage('Hubo un error interno en el servidor.');
+          setOkMessage('');
         } else {
           setErrorMessage(data.message || 'Error en el registro. Intenta de nuevo.');
+          setOkMessage('');
         }
       }
     } catch (error) {
       console.error('Error en la conexión con el servidor:', error);
       setErrorMessage('Error en la conexión con el servidor.');
+      setOkMessage('');
     }
   };
 
@@ -85,6 +90,7 @@ export const Register = () => {
                 required
               />
             </div>
+            {okMessage && <div className="alert alert-success">{okMessage}</div>}
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <button type="submit" className="btn btn-primary w-100">
               Crear cuenta
