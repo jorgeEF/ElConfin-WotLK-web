@@ -25,3 +25,7 @@ dist-ssr
 
 # ENV
 *.env
+
+# scripts
+*.sh
+*.bat
