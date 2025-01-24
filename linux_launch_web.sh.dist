@@ -7,8 +7,11 @@ export NVM_DIR="$HOME/.config/nvm"
 # Asegurarse de que tmux y otros binarios sean accesibles
 export PATH="$PATH:/snap/bin:/home/confin/.config/nvm/versions/node/v22.13.1/bin"
 
+# Determinar el directorio del script
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 # Crear una nueva sesión para el backend
-tmux new-session -d -s web_backend "cd /home/confin/confin_web/backend && npm run start"
+tmux new-session -d -s web_backend "cd $SCRIPT_DIR/backend && npm run start"
 
 # Crear una nueva sesión para el frontend
-tmux new-session -d -s web_frontend "cd /home/confin/confin_web/frontend && npx serve -s dist -l 8080"
+tmux new-session -d -s web_frontend "cd $SCRIPT_DIR/frontend && npx serve -s dist -l 8080"
