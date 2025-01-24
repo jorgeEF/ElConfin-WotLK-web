@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Cargar nvm
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Determinar rutas dinámicas para tmux, npm y npx
+TMUX_BIN="$(which tmux)"
+NPM_BIN="$(which npm)"
+NPX_BIN="$(which npx)"
+
+# Validar si se encontraron las rutas
+if [ -z "$TMUX_BIN" ]; then
+  echo "Error: No se encontró tmux en el PATH." >&2
+  exit 1
+fi
+
+if [ -z "$NPM_BIN" ]; then
+  echo "Error: No se encontró npm en el PATH." >&2
+  exit 1
+fi
+
+if [ -z "$NPX_BIN" ]; then
+  echo "Error: No se encontró npx en el PATH." >&2
+  exit 1
+fi
+
+# Determinar el directorio del script
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+# Crear una nueva sesión para el backend, usando las rutas dinámicas
+"$TMUX_BIN" new-session -d -s web_backend "$NPM_BIN run start --prefix $SCRIPT_DIR/backend"
+
+# Crear una nueva sesión para el frontend, usando las rutas dinámicas
+"$TMUX_BIN" new-session -d -s web_frontend "$NPX_BIN serve -s $SCRIPT_DIR/frontend/dist -l 8080"
