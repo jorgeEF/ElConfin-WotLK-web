@@ -4,21 +4,36 @@ import dotenv from 'dotenv';
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
 
-// Crear y exportar la conexión a la base de datos WOTLK
-export const db_wow = mysql.createConnection({
+// Crear y exportar la conexión a la base de datos wow auth
+export const db_wow_auth = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_WOW_USER,
   password: process.env.DB_WOW_PASSWORD,
-  database: process.env.DB_WOW_NAME,
+  database: process.env.DB_WOW_AUTH,
 });
 
-db_wow.connect((err) => {
+db_wow_auth.connect((err) => {
   if (err) {
     console.error('Error al conectar a la base de datos WoW:', err);
     return;
   }
-  console.log('Conectado a la base de datos WoW');
+  console.log('Conectado a la base de datos wow auth');
 });
 
 // Agregar otras bases de datos:
-// export const db_otherModule = mysql.createConnection({...});
+
+// Crear y exportar la conexión a la base de datos wow characters
+export const db_wow_characters = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_WOW_USER,
+  password: process.env.DB_WOW_PASSWORD,
+  database: process.env.DB_WOW_CHARACTERS,
+});
+
+db_wow_characters.connect((err) => {
+  if (err) {
+    console.error('Error al conectar a la base de datos WoW:', err);
+    return;
+  }
+  console.log('Conectado a la base de datos wow characters');
+});

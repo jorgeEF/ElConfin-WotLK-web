@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from '../../services/wow/authService.js';
+import { registerUser, loginUser, onlineUsers, onlineUsersAndBots } from '../../services/wow/authService.js';
 
 // Registrar usuario
 export const register = async (req, res) => {
@@ -42,5 +42,33 @@ export const login = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send("Error al iniciar sesión.");
+  }
+};
+
+// Usuarios online (excluyendo bots)
+export const online = async (req, res) => {
+  try {
+      const count = await onlineUsers();
+      res.status(200).json({ count });
+  } catch (error) {
+      console.error("Error al obtener usuarios online:", error);
+      res.status(500).json({
+          message: "Error al obtener usuarios online",
+          error: error.message,
+      });
+  }
+};
+
+// Usuarios + bots online
+export const onlineAll = async (req, res) => {
+  try {
+      const count = await onlineUsersAndBots();
+      res.status(200).json({ count });
+  } catch (error) {
+      console.error("Error al obtener usuarios y bots online:", error);
+      res.status(500).json({
+          message: "Error al obtener usuarios y bots online",
+          error: error.message,
+      });
   }
 };

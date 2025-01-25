@@ -1,4 +1,4 @@
-import { db_wow } from '../../config/db.js';
+import { db_wow_auth } from '../../config/db.js';
 import crypto from 'crypto';
 
 // Función para generar salt (32 bytes aleatorios)
@@ -62,7 +62,7 @@ export const registerUser = async (username, password, email) => {
 
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO account (username, salt, verifier, email) VALUES (?, ?, ?, ?)`;
-    db_wow.query(query, [username, salt, verifier, email], (err, result) => {
+    db_wow_auth.query(query, [username, salt, verifier, email], (err, result) => {
       if (err) {
         // Mostrar detalles del error en la consola del servidor
         console.error("Error al registrar la cuenta:", err);
@@ -84,7 +84,7 @@ export const registerUser = async (username, password, email) => {
 export const loginUser = async (username, password) => {
   return new Promise((resolve, reject) => {
     const query = `SELECT * FROM account WHERE username = ?`;
-    db_wow.query(query, [username], (err, results) => {
+    db_wow_auth.query(query, [username], (err, results) => {
       if (err || results.length === 0) {
         return reject("Usuario no encontrado.");
       }
@@ -99,4 +99,48 @@ export const loginUser = async (username, password) => {
       }
     });
   });
+};
+
+// Funcion para consultar usuarios online (excluyendo bots)
+export const onlineUsers = async () => {
+  try {
+      const count = await new Promise((resolve, reject) => {
+          const query = `
+              SELECT COUNT(*) AS count 
+              FROM account 
+              WHERE online = 1 AND username NOT LIKE '%RNDBOT%'
+          `;
+          db_wow_auth.query(query, (error, results) => {
+              if (error) return reject(error);
+              resolve(results[0].count); // Retorna el número de cuentas online (sin bots)
+          });
+      });
+
+      return count;
+  } catch (error) {
+      console.error("Error al consultar usuarios online:", error);
+      throw new Error("No se pudieron obtener los usuarios online");
+  }
+};
+
+// Funcion para consultar usuarios y bots online
+export const onlineUsersAndBots = async () => {
+  try {
+      const count = await new Promise((resolve, reject) => {
+          const query = `
+              SELECT COUNT(*) AS count 
+              FROM account 
+              WHERE online = 1
+          `;
+          db_wow_auth.query(query, (error, results) => {
+              if (error) return reject(error);
+              resolve(results[0].count); // Retorna el número de cuentas online (con bots)
+          });
+      });
+
+      return count;
+  } catch (error) {
+      console.error("Error al consultar usuarios y bots online:", error);
+      throw new Error("No se pudieron obtener los usuarios y bots online");
+  }
 };
