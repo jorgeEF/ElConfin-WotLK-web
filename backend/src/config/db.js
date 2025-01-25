@@ -4,19 +4,21 @@ import dotenv from 'dotenv';
 // Cargar las variables de entorno desde el archivo .env
 dotenv.config();
 
-const db = mysql.createConnection({
+// Crear y exportar la conexión a la base de datos WOTLK
+export const db_wow = mysql.createConnection({
   host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  user: process.env.DB_WOW_USER,
+  password: process.env.DB_WOW_PASSWORD,
+  database: process.env.DB_WOW_NAME,
 });
 
-db.connect((err) => {
+db_wow.connect((err) => {
   if (err) {
-    console.error('Error al conectar a la base de datos:', err);
+    console.error('Error al conectar a la base de datos WoW:', err);
     return;
   }
-  console.log('Conectado a la base de datos');
+  console.log('Conectado a la base de datos WoW');
 });
 
-export default db;
+// Agregar otras bases de datos:
+// export const db_otherModule = mysql.createConnection({...});

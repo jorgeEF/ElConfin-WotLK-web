@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes.js';  // Las rutas de autenticación
+import wowAuthRoutes from './routes/wow/authRoutes.js';  // Rutas de autenticación
 
 // Configurar dotenv para leer variables de entorno
 dotenv.config();
@@ -17,8 +17,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Rutas
-app.use('/api/auth', authRoutes);
+// Rutas WotLK
+app.use('/api/wow/auth', wowAuthRoutes);
 
 // Configuración del puerto
 const port = process.env.PORT;

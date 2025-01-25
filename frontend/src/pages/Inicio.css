@@ -1,19 +1,4 @@
 #inicio {
-    height: 50%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;    
-}
-
-.titulo {
-    font-size: xx-large;
-}
-
-.realmlist {
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
+    height: 80vh;
+    width: 100%;
 }

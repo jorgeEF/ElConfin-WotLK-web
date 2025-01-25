@@ -1,4 +1,4 @@
-import { registerUser, loginUser } from '../services/authService.js';
+import { registerUser, loginUser } from '../../services/wow/authService.js';
 
 // Registrar usuario
 export const register = async (req, res) => {

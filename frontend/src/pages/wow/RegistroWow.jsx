@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export const Register = () => {
+export const RegistroWow = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +15,7 @@ export const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/api/auth/register`, {
+      const response = await fetch(`${API_URL}/api/wow/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +53,7 @@ export const Register = () => {
     <div className="container-fluid d-flex justify-content-center" id='registro'>
       <div className="card shadow mt-5 w-25">
         <div className="card-body">
-          <h3 className="card-title text-center">Registro de cuentas</h3>
+          <h3 className="card-title text-center">El Confín: World of Warcraft creación de cuenta</h3>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">Usuario</label>
@@ -92,9 +93,15 @@ export const Register = () => {
             </div>
             {okMessage && <div className="alert alert-success">{okMessage}</div>}
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-            <button type="submit" className="btn btn-primary w-100">
-              Crear cuenta
-            </button>
+            <div className='botones d-flex gap-2'>
+              <Link to="/wow">
+                  <button className='btn btn-secondary'>Volver</button>
+              </Link>
+              <button type="submit" className="btn btn-primary ms-auto me-1">
+                Crear cuenta
+              </button>
+            </div>
+            
           </form>
         </div>
       </div>

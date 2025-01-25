@@ -1,4 +1,4 @@
-import db from '../config/db.js';
+import { db_wow } from '../../config/db.js';
 import crypto from 'crypto';
 
 // Función para generar salt (32 bytes aleatorios)
@@ -62,7 +62,7 @@ export const registerUser = async (username, password, email) => {
 
   return new Promise((resolve, reject) => {
     const query = `INSERT INTO account (username, salt, verifier, email) VALUES (?, ?, ?, ?)`;
-    db.query(query, [username, salt, verifier, email], (err, result) => {
+    db_wow.query(query, [username, salt, verifier, email], (err, result) => {
       if (err) {
         // Mostrar detalles del error en la consola del servidor
         console.error("Error al registrar la cuenta:", err);
@@ -84,7 +84,7 @@ export const registerUser = async (username, password, email) => {
 export const loginUser = async (username, password) => {
   return new Promise((resolve, reject) => {
     const query = `SELECT * FROM account WHERE username = ?`;
-    db.query(query, [username], (err, results) => {
+    db_wow.query(query, [username], (err, results) => {
       if (err || results.length === 0) {
         return reject("Usuario no encontrado.");
       }
