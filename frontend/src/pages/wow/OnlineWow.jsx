@@ -3,35 +3,43 @@ import { Link } from "react-router-dom";
 
 export const OnlineWow = () => {
   const [charsOnline, setCharsOnline] = useState([]);
+  const [charsCountOnline, setCharsCountOnline] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12); // Elementos por página
   const [errorMessage, setErrorMessage] = useState("");
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_URL;  
 
   useEffect(() => {
-    const fetchCharsOnline = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`${API_URL}/api/wow/status/online_chars`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (!response.ok) {
+        const [charsResponse, charsCountResponse] = await Promise.all([
+          fetch(`${API_URL}/api/wow/status/online_users_chars`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }),
+          fetch(`${API_URL}/api/wow/status/online_count`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }),
+        ]);
+  
+        if (!charsResponse.ok || !charsCountResponse.ok) {
           throw new Error("Error al obtener los datos del servidor.");
         }
-
-        const data = await response.json();
-        setCharsOnline(data);
+  
+        const charsData = await charsResponse.json();
+        const charsCountData = await charsCountResponse.json();
+  
+        setCharsOnline(charsData);
+        setCharsCountOnline(charsCountData);
       } catch (error) {
         console.error("Error en la conexión con el servidor:", error);
         setErrorMessage("Error en la conexión con el servidor.");
       }
     };
-
-    fetchCharsOnline();
+  
+    fetchData();
   }, [API_URL]);
 
   // Calcular datos para la página actual
@@ -79,16 +87,16 @@ export const OnlineWow = () => {
       </div>
 
       <div className="row d-flex justify-content-center mt-3">
-        <div className="col-md-12">
+        <div className="col-md-12">          
           <div className="row">
-            <div className="col-1 text-start">
-              <Link to="/wow">
-                <button className="btn btn-secondary">Volver</button>
-              </Link>
-            </div>
-            <div className="col-11 text-center">
-              <p>Personajes Online: {charsOnline.length}</p>
-            </div>
+            <div className="col-12 d-flex gap-2 justify-content-center">              
+              <button type="button" className="btn btn-primary">
+                Jugadores Online <span className="badge text-bg-secondary">{charsOnline.length}</span>
+              </button>
+              <button type="button" className="btn btn-warning">
+                Bots Online <span className="badge text-bg-secondary">{charsCountOnline.count - charsOnline.length}</span>
+              </button>
+            </div>            
           </div>
           {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
           <div className="row">
@@ -159,10 +167,17 @@ export const OnlineWow = () => {
                 </nav>
               </>
             ) : (
-              !errorMessage && <p>No hay jugadores online en este momento.</p>
+              !errorMessage && <p className="mt-3">No hay jugadores online en este momento.</p>
             )}
           </div>
         </div>
+      </div>
+      <div className="row">
+            <div className="col-12 d-flex justify-content-start">
+              <Link to="/wow">
+                <button className="btn btn-secondary">Volver</button>
+              </Link>
+            </div>
       </div>
     </div>
   );

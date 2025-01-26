@@ -1,12 +1,15 @@
 import express from 'express';
-import { onlineChars, onlineCharsCount } from '../../controllers/wow/statusController.js';
+import { getOnlineChars, getOnlineUsersChars, getOnlineCharsCount } from '../../controllers/wow/statusController.js';
 
 const router = express.Router();
 
-// Ruta para consultar usuarios online
-router.get('/online_chars', onlineChars);
+// Ruta para obtener lista de personajes online (incluye bots)
+router.get('/online_chars', getOnlineChars);
 
-// Ruta para contar personajes online
-router.get('/online_count', onlineCharsCount)
+// Ruta para obtener lista de personajes de usuarios online (excluye bots)
+router.get('/online_users_chars', getOnlineUsersChars);
+
+// Ruta para contar personajes online (incluye bots)
+router.get('/online_count', getOnlineCharsCount)
 
 export default router;

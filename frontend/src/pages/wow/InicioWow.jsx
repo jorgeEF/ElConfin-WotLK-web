@@ -15,7 +15,7 @@ export const InicioWow = () => {
         <div className='col-md-4'>
           <div className='CharsOnline' id='charsOnline'>
             <Link to="./online">
-              <button className='btn btn-info'>Personajes Online</button>
+              <button className='btn btn-info'>Jugadores Online</button>
             </Link>
           </div>
         </div>
