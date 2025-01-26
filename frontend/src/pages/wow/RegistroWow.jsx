@@ -7,7 +7,7 @@ export const RegistroWow = () => {
   const [password, setPassword] = useState('');
   const [okMessage, setOkMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  
+
   // URL del backend
   const API_URL = import.meta.env.VITE_API_URL;
 
@@ -28,7 +28,7 @@ export const RegistroWow = () => {
 
       if (response.ok) {
         setOkMessage(data.message);
-        setErrorMessage('');      
+        setErrorMessage('');
       } else {
         // Manejo de errores basado en el código de respuesta
         if (response.status === 409) {
@@ -50,10 +50,17 @@ export const RegistroWow = () => {
   };
 
   return (
-    <div className="container-fluid d-flex justify-content-center" id='registro'>
-      <div className="card shadow mt-5 w-25">
+    <div className="container bg-light mt-5 p-5" id='registro'>
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-12">
+          <span className="badge text-bg-primary w-100 fs-3 p-5">
+            El Confín: World of Warcraft
+          </span>
+        </div>
+      </div>      
+      <div className="card shadow mt-5 w-50 ms-auto me-auto">
         <div className="card-body">
-          <h3 className="card-title text-center">El Confín: World of Warcraft creación de cuenta</h3>
+          <h3 className="card-title text-center">Creación de cuenta</h3>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">Usuario</label>
@@ -95,13 +102,13 @@ export const RegistroWow = () => {
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <div className='botones d-flex gap-2'>
               <Link to="/wow">
-                  <button className='btn btn-secondary'>Volver</button>
+                <button className='btn btn-secondary'>Volver</button>
               </Link>
               <button type="submit" className="btn btn-primary ms-auto me-1">
                 Crear cuenta
               </button>
             </div>
-            
+
           </form>
         </div>
       </div>

@@ -80,95 +80,97 @@ export const OnlineWow = () => {
     <div className="container bg-light text-center mt-5 p-5 border rounded-1" id="OnlineWow">
       <div className="row d-flex justify-content-center">
         <div className="col-md-12">
-          <span className="badge text-bg-secondary w-100 fs-3 p-5">
+          <span className="badge text-bg-primary w-100 fs-3 p-5">
             El Confín: World of Warcraft
           </span>
         </div>
       </div>
 
       <div className="row d-flex justify-content-center mt-3">
-        <div className="col-md-12">          
+        <div className="col-md-12">
           <div className="row">
             <div className="col-12 d-flex gap-2 justify-content-center">              
-              <button type="button" className="btn btn-primary">
-                Jugadores Online <span className="badge text-bg-secondary">{charsOnline.length}</span>
+              <button type="button" className="btn btn-outline-primary">
+                Jugadores Online <span className="badge text-bg-primary">{charsOnline.length}</span>
               </button>
-              <button type="button" className="btn btn-warning">
-                Bots Online <span className="badge text-bg-secondary">{charsCountOnline.count - charsOnline.length}</span>
+              <button type="button" className="btn btn-outline-primary">
+                Bots Online <span className="badge text-bg-primary">{charsCountOnline.count - charsOnline.length}</span>
               </button>
             </div>            
           </div>
           {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-          <div className="row">
-            {!errorMessage && charsOnline.length > 0 ? (
-              <>
-                <table className="table table-sm">
-                  <thead>
-                    <tr>
-                      <th scope="col">Nombre</th>
-                      <th scope="col">Raza</th>
-                      <th scope="col">Clase</th>
-                      <th scope="col">Nivel</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {currentItems.map((char, index) => (
-                      <tr key={index}>
-                        <th scope="row">{char.name}</th>
-                        <td>{char.race}</td>
-                        <td>{char.class}</td>
-                        <td>{char.level}</td>
+          <div className="row mt-3">
+            <div className="col-md-12">
+              {!errorMessage && charsOnline.length > 0 ? (
+                <>
+                  <table className="table table-sm table-borderless table-hover">
+                    <thead class="table-primary">
+                      <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Raza</th>
+                        <th scope="col">Clase</th>
+                        <th scope="col">Nivel</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {currentItems.map((char, index) => (
+                        <tr key={index}>
+                          <th scope="row">{char.name}</th>
+                          <td>{char.race}</td>
+                          <td>{char.class}</td>
+                          <td>{char.level}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
 
-                {/* Paginación compacta */}
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination pagination-sm justify-content-center">
-                    <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-                      <button
-                        className="page-link"
-                        onClick={() => handlePageChange(currentPage - 1)}
-                        aria-label="Previous"
-                      >
-                        <span aria-hidden="true">&laquo;</span>
-                      </button>
-                    </li>
-                    {getPagination().map((page, index) => (
+                  {/* Paginación compacta */}
+                  <nav aria-label="Page navigation example">
+                    <ul className="pagination pagination-sm justify-content-center">
+                      <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                        <button
+                          className="page-link"
+                          onClick={() => handlePageChange(currentPage - 1)}
+                          aria-label="Previous"
+                        >
+                          <span aria-hidden="true">&laquo;</span>
+                        </button>
+                      </li>
+                      {getPagination().map((page, index) => (
+                        <li
+                          key={index}
+                          className={`page-item ${
+                            page === currentPage ? "active" : ""
+                          } ${page === "..." ? "disabled" : ""}`}
+                        >
+                          <button
+                            className="page-link"
+                            onClick={() => handlePageChange(page)}
+                          >
+                            {page}
+                          </button>
+                        </li>
+                      ))}
                       <li
-                        key={index}
                         className={`page-item ${
-                          page === currentPage ? "active" : ""
-                        } ${page === "..." ? "disabled" : ""}`}
+                          currentPage === totalPages ? "disabled" : ""
+                        }`}
                       >
                         <button
                           className="page-link"
-                          onClick={() => handlePageChange(page)}
+                          onClick={() => handlePageChange(currentPage + 1)}
+                          aria-label="Next"
                         >
-                          {page}
+                          <span aria-hidden="true">&raquo;</span>
                         </button>
                       </li>
-                    ))}
-                    <li
-                      className={`page-item ${
-                        currentPage === totalPages ? "disabled" : ""
-                      }`}
-                    >
-                      <button
-                        className="page-link"
-                        onClick={() => handlePageChange(currentPage + 1)}
-                        aria-label="Next"
-                      >
-                        <span aria-hidden="true">&raquo;</span>
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </>
-            ) : (
-              !errorMessage && <p className="mt-3">No hay jugadores online en este momento.</p>
-            )}
+                    </ul>
+                  </nav>
+                </>
+              ) : (
+                !errorMessage && <p className="mt-3">No hay jugadores online en este momento.</p>
+              )}
+            </div>
           </div>
         </div>
       </div>

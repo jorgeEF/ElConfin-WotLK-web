@@ -8,7 +8,7 @@ export const InicioWow = () => {
     <div className="container bg-light mt-5 p-5 border rounded" id='inicioWow'>
       <div className="row d-flex justify-content-center">
         <div className="col-md-12">
-          <span className="badge text-bg-secondary w-100 fs-3 p-5">
+          <span className="badge text-bg-primary w-100 fs-3 p-5">
             El Confín: World of Warcraft
           </span>
         </div>
@@ -17,7 +17,7 @@ export const InicioWow = () => {
         <div className='col-md-12 d-flex justify-content-center gap-2'>
           <div className='charsOnline' id='charsOnline'>
             <Link to="./online">
-              <button className='btn btn-outline-warning'>Jugadores Online</button>
+              <button className='btn btn-outline-primary'>Jugadores Online</button>
             </Link>
           </div>        
           <div className='descargaCliente' id='descargaCliente'>
@@ -25,15 +25,15 @@ export const InicioWow = () => {
           </div>          
           <div className='crearCuenta' id='crearCuenta'>
             <Link to="./registro">
-              <button className='btn btn-outline-success'>Crear cuenta</button>
+              <button className='btn btn-outline-primary'>Crear cuenta</button>
             </Link>
           </div>
         </div>
       </div>
-      <div className='row d-flex justify-content-center mt-3'>
+      <div className='row d-flex justify-content-center mt-5'>
         <div className='col-md-12 d-flex flex-column align-items-center' id='instrucciones'>
-          <div className="card">
-            <div className="card-header">Instrucciones</div>
+          <div className="card text-bg-primary">
+            <div className="card-header text-center">Instrucciones</div>
             <ol className="list-group list-group-numbered">
               <li className="list-group-item">Descargar el cliente y descomprimirlo</li>
               <li className="list-group-item">Ingresar a la carpeta Data/esMX</li>
