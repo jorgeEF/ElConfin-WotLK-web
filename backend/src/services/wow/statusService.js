@@ -6,7 +6,7 @@ export const onlineCharsStatus = async () => {
     try {
         // Crear una promesa para realizar la consulta a la base de datos
         const results = await new Promise((resolve, reject) => {
-            const query = `SELECT guid, account, name, race, class, online FROM characters WHERE online = 1`;
+            const query = `SELECT guid, account, name, race, class, level, online FROM characters WHERE online = 1`;
             db_wow_characters.query(query, (error, results) => {
                 if (error) {
                     return reject(error);

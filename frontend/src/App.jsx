@@ -5,6 +5,7 @@ import { Login } from './pages/Login'
 import { Registro } from './pages/Registro'
 import { InicioWow } from './pages/wow/InicioWow'
 import { RegistroWow } from './pages/wow/RegistroWow'
+import { OnlineWow } from './pages/wow/OnlineWow'
 
 function App() {
   return (    
@@ -16,6 +17,7 @@ function App() {
             <Route path="/registro" element={<Registro />} />
             <Route path="/wow" element={<InicioWow />} />
             <Route path="/wow/registro" element={<RegistroWow />} />
+            <Route path="/wow/online" element={<OnlineWow />} />
           </Route>
       </Routes>
     </Router>

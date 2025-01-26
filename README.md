@@ -1,4 +1,4 @@
-# El Confin - WotLK
+# El Confin Gaming
 
 App web fullstack desarrollada con express y vite por Jef
 

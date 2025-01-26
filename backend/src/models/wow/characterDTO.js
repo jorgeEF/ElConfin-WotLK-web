@@ -6,14 +6,16 @@ class CharacterDTO {
      * @param {string} name - El nombre del personaje.
      * @param {number} race - El identificador de la raza del personaje.
      * @param {number} charClass - El identificador de la clase del personaje.
+     * @param {number} level - El identificador del nivel del personaje.
      * @param {number} online - Estado del personaje (0 = offline, 1 = online).
      */
-    constructor(guid, account, name, race, charClass, online) {
+    constructor(guid, account, name, race, charClass, level, online) {
         this.guid = guid; // Identificador único
         this.account = account; // Identificador de cuenta
         this.name = name; // Nombre del personaje
         this.race = race; // Raza (tinyint en la base de datos)
         this.class = charClass; // Clase (tinyint en la base de datos)
+        this.level = level; // Nivel (tinyint en la base de datos)
         this.online = online; // Estado online (0 o 1)
     }
 
@@ -28,6 +30,7 @@ class CharacterDTO {
             name: this.name,
             race: this.race,
             class: this.class,
+            level: this.level,
             online: this.online,
         };
     }
@@ -44,6 +47,7 @@ class CharacterDTO {
             dbRow.name,
             dbRow.race,
             dbRow.class,
+            dbRow.level,
             dbRow.online
         );
     }
