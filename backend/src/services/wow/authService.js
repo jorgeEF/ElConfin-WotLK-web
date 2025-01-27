@@ -1,4 +1,4 @@
-import { db_wow_auth } from '../../config/db.js';
+import { db } from '../../config/db.js';
 import crypto from 'crypto';
 
 // Función para generar salt (32 bytes aleatorios)
@@ -61,8 +61,8 @@ export const registerUser = async (username, password, email) => {
   const verifier = calculateVerifier(salt, h1);
 
   return new Promise((resolve, reject) => {
-    const query = `INSERT INTO account (username, salt, verifier, email) VALUES (?, ?, ?, ?)`;
-    db_wow_auth.query(query, [username, salt, verifier, email], (err, result) => {
+    const query = `INSERT INTO acore_auth.account (username, salt, verifier, email) VALUES (?, ?, ?, ?)`;
+    db.query(query, [username, salt, verifier, email], (err, result) => {
       if (err) {
         // Mostrar detalles del error en la consola del servidor
         console.error("Error al registrar la cuenta:", err);
@@ -83,8 +83,8 @@ export const registerUser = async (username, password, email) => {
 // Función para verificar las credenciales de un usuario
 export const loginUser = async (username, password) => {
   return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM account WHERE username = ?`;
-    db_wow_auth.query(query, [username], (err, results) => {
+    const query = `SELECT * FROM acore_auth.account WHERE username = ?`;
+    db.query(query, [username], (err, results) => {
       if (err || results.length === 0) {
         return reject("Usuario no encontrado.");
       }
@@ -107,10 +107,10 @@ export const onlineUsers = async () => {
       const count = await new Promise((resolve, reject) => {
           const query = `
               SELECT COUNT(*) AS count 
-              FROM account 
+              FROM acore_auth.account 
               WHERE online = 1 AND username NOT LIKE '%RNDBOT%'
           `;
-          db_wow_auth.query(query, (error, results) => {
+          db.query(query, (error, results) => {
               if (error) return reject(error);
               resolve(results[0].count); // Retorna el número de cuentas online (sin bots)
           });
@@ -129,10 +129,10 @@ export const onlineUsersAndBots = async () => {
       const count = await new Promise((resolve, reject) => {
           const query = `
               SELECT COUNT(*) AS count 
-              FROM account 
+              FROM acore_auth.account 
               WHERE online = 1
           `;
-          db_wow_auth.query(query, (error, results) => {
+          db.query(query, (error, results) => {
               if (error) return reject(error);
               resolve(results[0].count); // Retorna el número de cuentas online (con bots)
           });

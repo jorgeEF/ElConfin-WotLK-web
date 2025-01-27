@@ -1,4 +1,4 @@
-import { db_wow_characters } from '../../config/db.js';
+import { db } from '../../config/db.js';
 import CharacterDTO from '../../models/wow/characterDTO.js';
 
 // Obtener informacion de personajes online
@@ -6,8 +6,8 @@ export const getOnlineCharsService = async () => {
     try {
         // Crear una promesa para realizar la consulta a la base de datos
         const results = await new Promise((resolve, reject) => {
-            const query = `SELECT guid, account, name, race, class, level, online FROM characters WHERE online = 1`;
-            db_wow_characters.query(query, (error, results) => {
+            const query = `SELECT guid, account, name, race, class, level, online FROM acore_characters.characters WHERE online = 1`;
+            db.query(query, (error, results) => {
                 if (error) {
                     return reject(error);
                 }
@@ -38,7 +38,7 @@ export const getOnlineUsersCharsService = async () => {
                     c.level,
                     c.online
                 FROM 
-                    characters c
+                    acore_characters.characters c
                 INNER JOIN 
                     acore_auth.account a
                 ON 
@@ -47,7 +47,7 @@ export const getOnlineUsersCharsService = async () => {
                     c.online = 1
                     AND a.username NOT LIKE '%RNDBOT%';
             `;
-            db_wow_characters.query(query, (error, results) => {
+            db.query(query, (error, results) => {
                 if (error) {
                     return reject(error);
                 }
@@ -69,10 +69,10 @@ export const getOnlineCharsCountService = async () => {
         const count = await new Promise((resolve, reject) => {
             const query = `
                 SELECT COUNT(*) AS count 
-                FROM characters 
+                FROM acore_characters.characters 
                 WHERE online = 1
             `;
-            db_wow_characters.query(query, (error, results) => {
+            db.query(query, (error, results) => {
                 if (error) return reject(error);
                 resolve(results[0].count); // Retorna el número de personajes online (con bots)
             });
