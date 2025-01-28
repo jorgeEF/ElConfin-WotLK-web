@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import authRoutes from './routes/authRoutes.js';
 import wowAuthRoutes from './routes/wow/authRoutes.js';
 import wowStatusRoutes from './routes/wow/statusRoutes.js';
 
@@ -17,6 +18,9 @@ app.use(cors({
   methods: ['GET', 'POST'], // Métodos permitidos
 }));
 app.use(express.json());
+
+// Rutas web
+app.use('/api/auth', authRoutes);
 
 // Rutas WoW
 app.use('/api/wow/auth', wowAuthRoutes);

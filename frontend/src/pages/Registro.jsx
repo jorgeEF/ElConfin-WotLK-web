@@ -7,14 +7,44 @@ export const Registro = () => {
   const [password, setPassword] = useState('');
   const [okMessage, setOkMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  
+
   // URL del backend
   const API_URL = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // logica de registro
+    // Limpiar mensajes de error o éxito
+    setOkMessage('');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password,          
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setOkMessage('Usuario registrado exitosamente.');
+        setUsername('');
+        setEmail('');
+        setPassword('');
+      } else {
+        setErrorMessage(data.message || 'Error al registrar el usuario.');
+      }
+    } catch (error) {
+      console.error('Error al comunicarse con la API:', error);
+      setErrorMessage('Hubo un problema al conectarse con el servidor.');
+    }
   };
 
   return (
@@ -63,7 +93,7 @@ export const Registro = () => {
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <div className='botones d-flex justify-content-center gap-5'>
               <Link to="/">
-                  <button className='btn btn-secondary'>Volver</button>
+                <button className='btn btn-secondary' type="button">Volver</button>
               </Link>
               <button type="submit" className="btn btn-primary">
                 Registrarse
