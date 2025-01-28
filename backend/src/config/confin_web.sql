@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.roles: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.roles: ~0 rows (aproximadamente)
 INSERT IGNORE INTO `roles` (`id`, `name`) VALUES
 	(1, 'admin'),
 	(2, 'moderador'),
@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `created_at` timestamp NOT NULL DEFAULT (now()),
   `role` int NOT NULL DEFAULT (3),
   `banned` bit(1) NOT NULL DEFAULT (0),
-  `banned_at` timestamp NOT NULL,
+  `banned_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
