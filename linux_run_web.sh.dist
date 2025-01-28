@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Cargar nvm
-export NVM_DIR="$HOME/.config/nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 # Determinar rutas dinámicas para tmux, npm y npx
