@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `post_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.post_categories: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.post_categories: ~0 rows (aproximadamente)
 INSERT IGNORE INTO `post_categories` (`id`, `name`, `description`) VALUES
 	(1, 'novedades', 'novedades de el confin'),
 	(2, 'avisos', 'avisos de el confin'),
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.roles: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.roles: ~0 rows (aproximadamente)
 INSERT IGNORE INTO `roles` (`id`, `name`) VALUES
 	(1, 'admin'),
 	(2, 'moderador'),
@@ -98,23 +98,24 @@ INSERT IGNORE INTO `roles` (`id`, `name`) VALUES
 -- Volcando estructura para tabla confin_web.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `username` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `email` varchar(50) COLLATE utf8mb4_bin NOT NULL DEFAULT '',
   `password` binary(32) NOT NULL,
   `online` tinyint NOT NULL DEFAULT (0),
   `created_at` timestamp NOT NULL DEFAULT (now()),
-  `role` int NOT NULL,
+  `role` int NOT NULL DEFAULT (3),
   `banned` bit(1) NOT NULL DEFAULT (0),
-  `banned_at` timestamp NOT NULL,
+  `banned_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   KEY `FK_users_roles` (`role`),
   CONSTRAINT `FK_users_roles` FOREIGN KEY (`role`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.users: ~1 rows (aproximadamente)
+INSERT IGNORE INTO `users` (`id`, `username`, `email`, `password`, `online`, `created_at`, `role`, `banned`, `banned_at`) VALUES
+	(1, 'jeFFFFFFFx', 'jorgefemenia@gmail.com', _binary 0xac8c7d135985254b6bac3520720d09e954892b68cac6cedddb5804d81f9187fb, 0, '2025-01-28 03:33:34', 3, b'0', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
