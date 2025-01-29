@@ -83,7 +83,7 @@ export const loginUser = async (username, password) => {
     const encryptedPassword = encriptar(password);
 
     if (Buffer.compare(encryptedPassword, user.password) !== 0) {
-      throw { code: 401, message: 'Credenciales incorrectas.' };
+      throw { code: 401, message: 'El usuario/contraseña no son correctos.' };
     }
 
     // Si la contraseña coincide, devolver el usuario (excluyendo la contraseña)

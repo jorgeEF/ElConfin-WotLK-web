@@ -29,18 +29,26 @@ export const login = async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
-    return res.status(400).send("Faltan datos necesarios.");
+    return res.status(400).json({ message: "Faltan datos necesarios." });
   }
 
   try {
     const user = await loginUser(username, password);
     if (user) {
-      res.status(200).json({ message: "Inicio de sesión exitoso", user });
+      return res.status(200).json({ message: "Inicio de sesión exitoso", user });
     } else {
-      res.status(401).send("Credenciales incorrectas.");
+      return res.status(401).json({ message: "El usuario/contraseña no son correctos." });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error al iniciar sesión.");
+
+    // Aquí capturamos el error lanzado en el service y usamos el mensaje del error.
+    if (error.code && error.message) {
+      return res.status(error.code).json({ message: error.message });
+    }
+
+    // Si no hay código ni mensaje personalizado, usamos un mensaje genérico
+    return res.status(500).json({ message: "Error al iniciar sesión." });
   }
 };
+

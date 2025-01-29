@@ -1,14 +1,56 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [okMessage, setOkMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // URL del backend
+  const API_URL = import.meta.env.VITE_API_URL;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí va la lógica de inicio de sesión
-    console.log('Login submitted:', { username, password });
+
+    // Limpiar mensajes previos
+    setOkMessage('');
+    setErrorMessage('');
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Guardar usuario en localStorage
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        // Mostrar mensaje de éxito
+        setOkMessage('Usuario autenticado correctamente.');
+
+        // Limpiar campos
+        setUsername('');
+        setPassword('');
+
+        // Redirigir a la página de inicio después de 3 segundos
+        setTimeout(() => {
+          navigate('/');
+        }, 3000);
+      } else {
+        setErrorMessage(data.message || 'Error al iniciar sesión.');
+      }
+    } catch (error) {
+      console.error('Error al comunicarse con la API:', error);
+      setErrorMessage('Hubo un problema al conectarse con el servidor.');
+    }
   };
 
   return (
@@ -16,6 +58,8 @@ export const Login = () => {
       <div className="card shadow mt-5 w-25">
         <div className="card-body">
           <h3 className="card-title text-center">Iniciar sesión</h3>
+          {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+          {okMessage && <div className="alert alert-success">{okMessage}</div>}
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">Usuario</label>
@@ -43,17 +87,14 @@ export const Login = () => {
             </div>
             <div className='botones d-flex justify-content-center gap-5'>
               <Link to="/">
-                  <button className='btn btn-secondary'>Volver</button>
+                <button type="button" className='btn btn-secondary'>Volver</button>
               </Link>
-              <button type="submit" className="btn btn-primary">
-                Iniciar sesión
-              </button>
+              <button type="submit" className="btn btn-primary">Iniciar sesión</button>
             </div>
-            
           </form>
           <div className='crearCuenta text-center mt-4'>
-            <p>Aun no tenes cuenta? <a href="./registro"> registrate!</a></p>
-          </div>          
+            <p>Aún no tienes cuenta? <Link to="./registro">Regístrate!</Link></p>
+          </div>
         </div>
       </div>
     </div>
