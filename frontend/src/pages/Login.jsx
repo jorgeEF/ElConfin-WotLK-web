@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [okMessage, setOkMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const { login } = useAuth(); 
   const navigate = useNavigate();
 
   // URL del backend
@@ -30,8 +32,8 @@ export const Login = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Guardar usuario en localStorage
-        localStorage.setItem('user', JSON.stringify(data.user));
+        // Guardar usuario en localStorage con authContext
+        login(data.user);
 
         // Mostrar mensaje de éxito
         setOkMessage('Usuario autenticado correctamente.');
@@ -58,8 +60,7 @@ export const Login = () => {
       <div className="card shadow mt-5 w-25">
         <div className="card-body">
           <h3 className="card-title text-center">Iniciar sesión</h3>
-          {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-          {okMessage && <div className="alert alert-success">{okMessage}</div>}
+          
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">Usuario</label>
@@ -92,8 +93,10 @@ export const Login = () => {
               <button type="submit" className="btn btn-primary">Iniciar sesión</button>
             </div>
           </form>
+          {errorMessage && <div className="alert alert-danger mt-3">{errorMessage}</div>}
+          {okMessage && <div className="alert alert-success mt-3">{okMessage}</div>}
           <div className='crearCuenta text-center mt-4'>
-            <p>Aún no tienes cuenta? <Link to="./registro">Regístrate!</Link></p>
+            <p>Aún no tienes cuenta? <Link to="/registro">Regístrate!</Link></p>
           </div>
         </div>
       </div>
