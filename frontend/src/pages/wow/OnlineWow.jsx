@@ -107,8 +107,9 @@ export const OnlineWow = () => {
                     <thead class="table-primary">
                       <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Raza</th>
                         <th scope="col">Clase</th>
+                        <th scope="col">Raza</th>
+                        <th scope="col">Facción</th>                   
                         <th scope="col">Nivel</th>
                       </tr>
                     </thead>
@@ -116,8 +117,9 @@ export const OnlineWow = () => {
                       {currentItems.map((char, index) => (
                         <tr key={index}>
                           <th scope="row">{char.name}</th>
-                          <td>{char.race}</td>
                           <td>{char.class}</td>
+                          <td>{char.raceName}</td>
+                          <td>{char.faction}</td>                          
                           <td>{char.level}</td>
                         </tr>
                       ))}

@@ -1,3 +1,5 @@
+import { RaceEnum, getFactionByRace } from "../../utils/wow.js";
+
 class CharacterDTO {
     /**
      * Constructor para inicializar el objeto CharacterDTO.
@@ -14,6 +16,8 @@ class CharacterDTO {
         this.account = account; // Identificador de cuenta
         this.name = name; // Nombre del personaje
         this.race = race; // Raza (tinyint en la base de datos)
+        this.raceName = RaceEnum[race] || "Desconocido"; // Nombre de la raza
+        this.faction = getFactionByRace(race); // Determina la facción
         this.class = charClass; // Clase (tinyint en la base de datos)
         this.level = level; // Nivel (tinyint en la base de datos)
         this.online = online; // Estado online (0 o 1)
@@ -28,8 +32,9 @@ class CharacterDTO {
             guid: this.guid,
             account: this.account,
             name: this.name,
-            race: this.race,
-            class: this.class,
+            class: this.class,       
+            raceName: this.raceName, // Nuevo campo con el nombre de la raza
+            faction: this.faction, // Nuevo campo con la facción            
             level: this.level,
             online: this.online,
         };
