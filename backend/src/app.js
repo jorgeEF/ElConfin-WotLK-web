@@ -3,7 +3,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import fs from 'fs';
 import https from 'https';
-import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import postRoutes from './routes/postRoutes.js';
+//import commentRoutes from './routes/commentRoutes.js';
 import wowAuthRoutes from './routes/wow/authRoutes.js';
 import wowStatusRoutes from './routes/wow/statusRoutes.js';
 
@@ -17,12 +19,14 @@ const FRONT_URL = process.env.FRONT_URL;
 // Middlewares
 app.use(cors({
   origin: FRONT_URL, // Permitir solo este origen
-  methods: ['GET', 'POST'], // Métodos permitidos
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos permitidos
 }));
 app.use(express.json());
 
 // Rutas web
-app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
+//app.use('/api/comment', commentRoutes);
 
 // Rutas WoW
 app.use('/api/wow/auth', wowAuthRoutes);
