@@ -88,7 +88,86 @@ sudo ufw status
 ```
 
 **Usar script run_backend en cron para ejecutar solo el backend al inciciar el sistema.**
+  
 
+### NGINX HTTPS
+0. habilitar puerto https:  
+`sudo ufw allow 443/tcp `
+1. Instalar nginx:  
+`sudo apt install nginx`  
+2. Crear archivo de configuracion:  
+`sudo nano /etc/nginx/sites-available/confin`   
+3. Editar el archivo de configuracion:  
+```
+server {
+    server_name confin.ddns.net;
+
+    root /home/confin/www;  # Ruta de tus archivos frontend
+    index index.html;  # Página por defecto
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
+        proxy_pass https://localhost:3000;  # Usar HTTPS en lugar de HTTP
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto https;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/confin.ddns.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/confin.ddns.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+    if ($host = confin.ddns.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    listen 80;
+    server_name confin.ddns.net;
+    return 404; # managed by Certbot
+}
+
+```
+
+4. habilitar configuracion personalizada:  
+`sudo ln -s /etc/nginx/sites-available/confin /etc/nginx/sites-enabled/`
+
+5. instalar bot certificado https:  
+`sudo apt install certbot python3-certbot-nginx`  
+
+6. solicitar certificado:  
+`sudo certbot --nginx -d confin.ddns.net` 
+
+7. verificar permisos certificados:  
+`ls -l /etc/letsencrypt/live/confin.ddns.net/`  
+
+8. Configurar permisos para que backend pueda acceder a certificados:  
+```
+sudo chmod 644 /etc/letsencrypt/archive/confin.ddns.net/*.pem
+sudo chmod 640 /etc/letsencrypt/archive/confin.ddns.net/privkey1.pem
+
+sudo chown -R confin:confin /etc/letsencrypt/live/confin.ddns.net
+sudo chown -R confin:confin /etc/letsencrypt/archive/confin.ddns.net
+
+```
+
+9. probar configuracion nginx:  
+`sudo nginx -t`  
+10. recargar configuracion nginx:  
+`sudo systemctl reload nginx`  
+11. reiniciar nginx:  
+`sudo systemctl restart nginx`
+
+#### renovar certificado
+
+`sudo certbot renew --dry-run`
 
 
 
