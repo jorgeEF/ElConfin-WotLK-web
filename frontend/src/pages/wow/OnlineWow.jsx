@@ -111,6 +111,7 @@ export const OnlineWow = () => {
                         <th scope="col">Raza</th>
                         <th scope="col">Facción</th>                   
                         <th scope="col">Nivel</th>
+                        <th scope="col">Zona actual</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -121,6 +122,7 @@ export const OnlineWow = () => {
                           <td>{char.raceName} ({char.race})</td>
                           <td>{char.faction}</td>                          
                           <td>{char.level}</td>
+                          <td>{char.zoneName}</td>
                         </tr>
                       ))}
                     </tbody>

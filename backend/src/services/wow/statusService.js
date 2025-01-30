@@ -6,7 +6,7 @@ export const getOnlineCharsService = async () => {
     try {
         // Crear una promesa para realizar la consulta a la base de datos
         const results = await new Promise((resolve, reject) => {
-            const query = `SELECT guid, account, name, race, class, level, online FROM acore_characters.characters WHERE online = 1`;
+            const query = `SELECT guid, account, name, race, class, level, zone, online FROM acore_characters.characters WHERE online = 1`;
             db.query(query, (error, results) => {
                 if (error) {
                     return reject(error);
@@ -36,6 +36,7 @@ export const getOnlineUsersCharsService = async () => {
                     c.race,
                     c.class,
                     c.level,
+                    c.zone,
                     c.online
                 FROM 
                     acore_characters.characters c

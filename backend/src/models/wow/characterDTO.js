@@ -1,4 +1,4 @@
-import { ClassEnum, RaceEnum, getFactionByRace } from "../../utils/wow.js";
+import { ClassEnum, RaceEnum, ZoneEnum, getFactionByRace } from "../../utils/wow.js";
 
 class CharacterDTO {
     /**
@@ -9,9 +9,10 @@ class CharacterDTO {
      * @param {number} race - El identificador de la raza del personaje.
      * @param {number} charClass - El identificador de la clase del personaje.
      * @param {number} level - El identificador del nivel del personaje.
+     * @param {number} zone - El identificador de la zona donde se encuentra el personaje.
      * @param {number} online - Estado del personaje (0 = offline, 1 = online).
      */
-    constructor(guid, account, name, race, charClass, level, online) {
+    constructor(guid, account, name, race, charClass, level, zone, online) {
         this.guid = guid; // Identificador único
         this.account = account; // Identificador de cuenta
         this.name = name; // Nombre del personaje
@@ -21,6 +22,8 @@ class CharacterDTO {
         this.raceName = RaceEnum[race] || "Desconocido"; // Nombre de la raza
         this.faction = getFactionByRace(race); // Determina la facción        
         this.level = level; // Nivel (tinyint en la base de datos)
+        this.zone = zone; // Zona donde se encuentra el personaje
+        this.zoneName = ZoneEnum[zone];
         this.online = online; // Estado online (0 o 1)
     }
 
@@ -39,6 +42,8 @@ class CharacterDTO {
             raceName: this.raceName, // Nuevo campo con el nombre de la raza
             faction: this.faction, // Nuevo campo con la facción            
             level: this.level,
+            zone: this.zone,
+            zoneName:this.zoneName, // campo creado de enum
             online: this.online,
         };
     }
@@ -56,6 +61,7 @@ class CharacterDTO {
             dbRow.race,
             dbRow.class,
             dbRow.level,
+            dbRow.zone,
             dbRow.online
         );
     }
