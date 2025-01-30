@@ -10,3 +10,9 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Build generado exitosamente."
+
+echo "copiando Build a www"
+
+sudo cp -r /home/confin/web/frontend/dist/* /home/confin/www
+
+echo "frontend desplegado"

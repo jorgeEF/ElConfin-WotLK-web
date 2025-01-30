@@ -31,6 +31,9 @@ if [ -z "$NPX_BIN" ]; then
   exit 1
 fi
 
+# terminar sesion tmux previa
+tmux kill-session -t web_backend
+
 # Determinar el directorio del script
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
