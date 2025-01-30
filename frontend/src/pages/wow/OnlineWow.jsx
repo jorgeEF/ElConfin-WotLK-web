@@ -118,8 +118,8 @@ export const OnlineWow = () => {
                       {currentItems.map((char, index) => (
                         <tr key={index}>
                           <th scope="row">{char.name}</th>
-                          <td>{char.className} ({char.class})</td>
-                          <td>{char.raceName} ({char.race})</td>
+                          <td>{char.className}</td>
+                          <td>{char.raceName}</td>
                           <td>{char.faction}</td>                          
                           <td>{char.level}</td>
                           <td>{char.zoneName}</td>
