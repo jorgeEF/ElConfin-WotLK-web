@@ -6,14 +6,14 @@ export const Menu = () => {
 
   return (
     <nav className="navbar bg-dark" data-bs-theme="dark">
-      <div className="container-fluid">
+      <div className="container">
         <div className="col-md-3 ms-3">
           <Link to="/" className="text-decoration-none">
             Inicio
           </Link>
         </div>
         <div className="col-md-4"></div>
-        <div className="col-md-4 me-3">
+        <div className="col-md-4 d-flex justify-content-end me-3">
           {user ? (
             <div className="dropdown">
               <button
