@@ -14,37 +14,35 @@ export const Menu = () => {
         </div>
         <div className="col-md-4"></div>
         <div className="col-md-4 me-3">
-          <div className="d-flex justify-content-end gap-3">
-            {user ? (
-              <div className="dropdown">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {user.username}
-                </button>
-                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li>
-                    <Link to="/account" className="dropdown-item">
-                      Mi cuenta
-                    </Link>
-                  </li>
-                  <li>
-                    <button className="dropdown-item" onClick={logout}>
-                      Cerrar sesión
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <Link to="/login">
-                <button className="btn btn-primary">Iniciar sesión</button>
-              </Link>
-            )}
-          </div>
+          {user ? (
+            <div className="dropdown">
+              <button
+                className="btn btn-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {user.username}
+              </button>
+              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li>
+                  <Link to="/account" className="dropdown-item">
+                    Mi cuenta
+                  </Link>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={logout}>
+                    Cerrar sesión
+                  </button>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="btn btn-primary">Iniciar sesión</button>
+            </Link>
+          )}
         </div>
       </div>
     </nav>
