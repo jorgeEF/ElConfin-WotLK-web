@@ -21,18 +21,18 @@ USE `confin_web`;
 
 -- Volcando estructura para tabla confin_web.comments
 CREATE TABLE IF NOT EXISTS `comments` (
-  `1` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `author_id` int NOT NULL,
   `post_id` int NOT NULL,
-  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT (now()),
   `visible` bit(1) NOT NULL DEFAULT (1),
-  PRIMARY KEY (`1`),
+  PRIMARY KEY (`id`) USING BTREE,
   KEY `FK_comments_users` (`author_id`),
   KEY `FK_comments_posts` (`post_id`),
   CONSTRAINT `FK_comments_posts` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   CONSTRAINT `FK_comments_users` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Volcando datos para la tabla confin_web.comments: ~0 rows (aproximadamente)
 
@@ -51,17 +51,17 @@ CREATE TABLE IF NOT EXISTS `config` (
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '',
-  `text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `author_id` int NOT NULL DEFAULT (0),
-  `category` int NOT NULL DEFAULT '0',
+  `category_id` int NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT (now()),
   `visible` bit(1) NOT NULL DEFAULT (1),
   PRIMARY KEY (`id`),
   KEY `FK_posts_users` (`author_id`),
-  KEY `FK_posts_post_categories` (`category`),
-  CONSTRAINT `FK_posts_post_categories` FOREIGN KEY (`category`) REFERENCES `post_categories` (`id`),
+  KEY `FK_posts_post_categories` (`category_id`) USING BTREE,
+  CONSTRAINT `FK_posts_post_categories` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`),
   CONSTRAINT `FK_posts_users` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- Volcando datos para la tabla confin_web.posts: ~0 rows (aproximadamente)
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.roles: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.roles: ~3 rows (aproximadamente)
 INSERT IGNORE INTO `roles` (`id`, `name`) VALUES
 	(1, 'admin'),
 	(2, 'moderador'),
@@ -111,9 +111,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `email` (`email`),
   KEY `FK_users_roles` (`role`),
   CONSTRAINT `FK_users_roles` FOREIGN KEY (`role`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.users: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.users: ~2 rows (aproximadamente)
+INSERT IGNORE INTO `users` (`id`, `username`, `email`, `password`, `online`, `created_at`, `role`, `banned`, `banned_at`) VALUES
+	(1, 'jeFFFFFFFx', 'jorgefemenia@gmail.com', _binary 0xac8c7d135985254b6bac3520720d09e954892b68cac6cedddb5804d81f9187fb, 0, '2025-01-28 23:27:27', 1, b'0', NULL),
+	(4, 'admin', 'jefponja@gmail.com', _binary 0x94d9ecadba85b97ae982b69cb8235d71446b27523d80d654f09e003022b36bb7, 0, '2025-01-30 23:08:54', 3, b'0', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
