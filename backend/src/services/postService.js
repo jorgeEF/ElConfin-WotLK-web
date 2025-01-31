@@ -41,7 +41,7 @@ export const createPost = async (title, content, author_id, category_id, visible
 // Obtener todos los posts
 export const getAllPosts = async () => {
     try {
-        const query = 'SELECT * FROM confin_web.posts';
+        const query = 'SELECT * FROM confin_web.posts ORDER BY created_at DESC';
         const result = await new Promise((resolve, reject) => {
             db.query(query, (err, res) => {
                 if (err) {
