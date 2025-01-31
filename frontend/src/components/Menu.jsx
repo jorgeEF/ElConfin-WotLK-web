@@ -26,9 +26,16 @@ export const Menu = () => {
                 {user.username}
               </button>
               <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {user.role !== 3 && 
+                  <li>
+                    <Link to="/adm/publicar" className="dropdown-item">
+                      Crear publicación
+                    </Link>
+                  </li>
+                }
                 <li>
-                  <Link to="/account" className="dropdown-item">
-                    Mi cuenta
+                  <Link to="/user/perfil" className="dropdown-item">
+                    Mi perfíl
                   </Link>
                 </li>
                 <li>
