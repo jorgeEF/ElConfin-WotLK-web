@@ -5,7 +5,7 @@ import fs from 'fs';
 import https from 'https';
 import userRoutes from './routes/userRoutes.js';
 import postRoutes from './routes/postRoutes.js';
-//import commentRoutes from './routes/commentRoutes.js';
+import commentRoutes from './routes/commentRoutes.js';
 import wowAuthRoutes from './routes/wow/authRoutes.js';
 import wowStatusRoutes from './routes/wow/statusRoutes.js';
 
@@ -26,7 +26,7 @@ app.use(express.json());
 // Rutas web
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
-//app.use('/api/comment', commentRoutes);
+app.use('/api/comment', commentRoutes);
 
 // Rutas WoW
 app.use('/api/wow/auth', wowAuthRoutes);

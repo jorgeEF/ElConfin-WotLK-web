@@ -1,21 +1,21 @@
 import express from 'express';
-import { createComment, getAllComment, getComment, updateComment, deleteComment } from '../controllers/commentController.js';
+import { createComment, getAllCommentsByPost, getComment, updateComment, deleteComment } from '../controllers/commentController.js';
 
 const router = express.Router();
 
-// Ruta para crear un posteo
+// Ruta para crear un comentario
 router.post('/', createComment);
 
-// Ruta para obtener todos los posteos
-router.get('/', getAllComment);
+// Ruta para obtener todos los comentarios de un post
+router.get('/post/:post_id', getAllCommentsByPost);
 
-// Ruta para obtener un posteo
+// Ruta para obtener un comentario por ID
 router.get('/:id', getComment);
 
-// Ruta para actualizar un posteo
+// Ruta para actualizar un comentario por ID
 router.put('/:id', updateComment);
 
-// Ruta para actualizar un posteo
+// Ruta para eliminar un comentario por ID
 router.delete('/:id', deleteComment);
 
 export default router;
