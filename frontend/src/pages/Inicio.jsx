@@ -49,7 +49,8 @@ export const Inicio = () => {
         </div>          
       </div>      
       <div className='row d-flex justify-content-center mt-3'>
-        <div className='col-md-9 d-flex flex-column align-items-center'>
+        <div className='col-md-2 d-flex flex-column align-items-center'></div>
+        <div className='col-md-8 d-flex flex-column align-items-center'>
           <div className='row w-100'>
             <div className="card mb-3">
               <div className="card-body">
@@ -105,7 +106,7 @@ export const Inicio = () => {
           </div>}
         </div>
         
-        <div className='col-md-3 d-flex flex-column align-items-center'>
+        <div className='col-md-2 d-flex flex-column align-items-center'>
           <div className='servidores' id='servidores'>
             <span className="badge text-bg-secondary w-100 fs-6 mb-3">Servidores</span>
             <Link to="/wow">
