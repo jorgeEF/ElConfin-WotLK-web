@@ -49,19 +49,32 @@ export const Inicio = () => {
         </div>          
       </div>      
       <div className='row d-flex justify-content-center mt-3'>
-        <div className='col-md-10 d-flex flex-column align-items-center'>
+        <div className='col-md-9 d-flex flex-column align-items-center'>
+          <div className='row w-100'>
+            <div className="card mb-3">
+              <div className="card-body">
+                <h5 className="card-title">Bienvenidos a nuestra comunidad!</h5>
+                <p className="card-text">De gamers para gamers</p>                
+              </div>
+            </div>
+          </div>
           <div className='row w-100'>
             <span className="badge text-bg-secondary w-100 fs-6 mb-3">Novedades</span>
           </div>
-          <div className='row w-75'>        
+          <div className='row w-100'>        
             <div className='novedades' id='novedades'>
-              {novedadesPaginadas.map((novedad, index) => (                    
+              {novedadesPaginadas.map((novedad, index) => (                                
                 <div className="card mb-3" key={index}>
-                  <div className="card-body">
-                    <h5 className="card-title">{novedad.title}</h5>
-                    <p className="card-text">{novedad.content}</p>
-                    <a href="#" className="card-link">Comentarios</a>
-                    <a href="#" className="card-link">Me gusta</a>
+                  <div className='text-end me-2 fecha'>
+                    {new Intl.DateTimeFormat('es-ES', {
+                    dateStyle: 'short'                      
+                    }).format(new Date(novedad.created_at))}
+                  </div>                
+                  <div className="card-body">                    
+                    <h5 className="card-title">{novedad.title}</h5>                    
+                    <p className="card-text mt-2">{novedad.content}</p>
+                    {/* <a href="#" className="card-link">Comentarios</a> */}
+                    {/* <a href="#" className="card-link">Me gusta</a> */}
                   </div>
                 </div>
               ))}
@@ -70,7 +83,7 @@ export const Inicio = () => {
             {errorMessage && <div className="alert alert-danger mt-3">{errorMessage}</div>}
             
           </div>
-          {novedades.length>0 && <div className='row w-75'>
+          {novedades.length>3 && <div className='row w-75'>
             {/* Controles de paginación */}
             <div className="pagination mt-4 d-flex justify-content-center">
               <button 
@@ -92,7 +105,7 @@ export const Inicio = () => {
           </div>}
         </div>
         
-        <div className='col-md-2 d-flex flex-column align-items-center'>
+        <div className='col-md-3 d-flex flex-column align-items-center'>
           <div className='servidores' id='servidores'>
             <span className="badge text-bg-secondary w-100 fs-6 mb-3">Servidores</span>
             <Link to="/wow">
