@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './InicioWow.css';
 import { Submenu } from '../../components/wow/Submenu'
 
 export const ComoJugar = () => {
