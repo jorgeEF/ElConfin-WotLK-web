@@ -6,6 +6,7 @@ export const Publicar = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [category_id, setCategoryId] = useState(1); // Categoría predeterminada
+    const [main_page, setMainPage] = useState(1);
     const [okMessage, setOkMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     
@@ -25,11 +26,7 @@ export const Publicar = () => {
     // Enumeración de categorías
     const categoriesEnum = {
         1: "Novedades",
-        2: "Avisos",
-        3: "Historias",
-        4: "WoW Novedades",
-        5: "WoW Avisos",
-        6: "WoW Historias"
+        2: "WoW Novedades"        
     };
 
     const handleSubmit = async (e) => {
@@ -48,7 +45,8 @@ export const Publicar = () => {
                     content,
                     author_id: user.id,  // Se asigna directamente
                     category_id,
-                    visible: 1
+                    visible: 1,
+                    main_page
                 }),
             });
 
@@ -113,6 +111,18 @@ export const Publicar = () => {
                                     <option key={id} value={id}>{name}</option>
                                 ))}
                             </select>
+                        </div>                        
+                        <div className="mb-3 form-check">
+                            <input 
+                                type="checkbox" 
+                                className="form-check-input" 
+                                id="mainPage"
+                                checked={main_page === 1}
+                                onChange={(e) => setMainPage(e.target.checked ? 1 : 0)}
+                            />
+                            <label className="form-check-label" htmlFor="mainPage">
+                                Mostrar en Inicio
+                            </label>
                         </div>
                         <div className='botones d-flex justify-content-center gap-5'>
                             <Link to="/">

@@ -3,10 +3,10 @@ import * as postService from '../services/postService.js';
 // Crear un nuevo post
 export const createPost = async (req, res) => {
     try {        
-        const { title, content, author_id, category_id, visible } = req.body;
+        const { title, content, author_id, category_id, visible, main_page } = req.body;
 
         // Llamada al servicio para crear el post
-        const postId = await postService.createPost(title, content, author_id, category_id, visible);
+        const postId = await postService.createPost(title, content, author_id, category_id, visible, main_page);
 
         if (!postId) {
             return res.status(500).json({ message: 'Error al obtener el ID del post' });
@@ -52,8 +52,8 @@ export const getPost = async (req, res) => {
 // Actualizar un post por ID
 export const updatePost = async (req, res) => {
     try {
-        const { title, content, author_id, category_id, visible } = req.body;
-        const updated = await postService.updatePostById(req.params.id, title, content, author_id, category_id, visible);
+        const { title, content, author_id, category_id, visible, main_page } = req.body;
+        const updated = await postService.updatePostById(req.params.id, title, content, author_id, category_id, visible, main_page);
         if (!updated) return res.status(404).json({ message: 'Post no encontrado' });
         res.status(200).json({ message: 'Post actualizado' });
     } catch (error) {

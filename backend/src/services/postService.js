@@ -2,10 +2,10 @@ import { db } from '../config/db.js';
 import Post from '../models/Post.js';
 
 // Crear un nuevo post
-export const createPost = async (title, content, author_id, category_id, visible) => {
+export const createPost = async (title, content, author_id, category_id, visible, main_page) => {
     try {
         // Crear una nueva instancia de Post
-        const newPost = new Post({ title, content, author_id, category_id, visible });
+        const newPost = new Post({ title, content, author_id, category_id, visible, main_page });
 
         // Validar los datos del post
         const validationError = Post.validate(newPost);
@@ -14,8 +14,8 @@ export const createPost = async (title, content, author_id, category_id, visible
         }
 
         // Ejecutar la consulta SQL para insertar el post usando db.query, con promesas
-        const query = 'INSERT INTO confin_web.posts (title, content, author_id, category_id, visible) VALUES (?, ?, ?, ?, ?)';
-        const values = [title, content, author_id, category_id, visible];
+        const query = 'INSERT INTO confin_web.posts (title, content, author_id, category_id, visible, main_page) VALUES (?, ?, ?, ?, ?, ?)';
+        const values = [title, content, author_id, category_id, visible, main_page];
 
         const result = await new Promise((resolve, reject) => {
             db.query(query, values, (err, res) => {
@@ -41,7 +41,7 @@ export const createPost = async (title, content, author_id, category_id, visible
 // Obtener todos los posts
 export const getAllPosts = async () => {
     try {
-        const query = 'SELECT * FROM confin_web.posts ORDER BY created_at DESC';
+        const query = 'SELECT * FROM confin_web.posts WHERE main_page = 1 ORDER BY created_at DESC';
         const result = await new Promise((resolve, reject) => {
             db.query(query, (err, res) => {
                 if (err) {
@@ -97,17 +97,17 @@ export const getPostById = async (id) => {
 };
 
 // Actualizar un post por ID
-export const updatePostById = async (id, title, content, author_id, category_id, visible) => {
+export const updatePostById = async (id, title, content, author_id, category_id, visible, main_page) => {
     try {
-        const updatedPost = new Post({ id, title, content, author_id, category_id, visible });
+        const updatedPost = new Post({ id, title, content, author_id, category_id, visible, main_page });
 
         // Validar el post antes de actualizarlo
         const error = Post.validate(updatedPost);
         if (error) throw new Error(error);
 
-        const query = 'UPDATE confin_web.posts SET title = ?, content = ?, author_id = ?, category_id = ?, visible = ? WHERE id = ?';
+        const query = 'UPDATE confin_web.posts SET title = ?, content = ?, author_id = ?, category_id = ?, visible = ?, main_page = ? WHERE id = ?';
         const result = await new Promise((resolve, reject) => {
-            db.query(query, [updatedPost.title, updatedPost.content, updatedPost.author_id, updatedPost.category_id, updatedPost.visible, updatedPost.id], (err, res) => {
+            db.query(query, [updatedPost.id, updatedPost.title, updatedPost.content, updatedPost.author_id, updatedPost.category_id, updatedPost.visible, updatedPost.main_page], (err, res) => {
                 if (err) {
                     reject(err);
                 } else {
