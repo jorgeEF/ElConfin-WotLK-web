@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './InicioWow.css';
 import { Submenu } from '../../components/wow/Submenu'
 
 export const InicioWow = () => {
@@ -45,7 +44,7 @@ export const InicioWow = () => {
   return (
     <div className="container bg-light mt-5 p-5 border rounded" id='inicioWow'>      
       <Submenu />
-      
+
       <div className='row d-flex justify-content-center mt-5'>
         <div className='row w-75'>
           <span className="badge text-bg-primary fs-6 mb-3">Novedades</span>
