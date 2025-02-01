@@ -9,6 +9,7 @@ import { InicioWow } from './pages/wow/InicioWow'
 import { RegistroWow } from './pages/wow/RegistroWow'
 import { OnlineWow } from './pages/wow/OnlineWow'
 import { ComoJugar } from './pages/wow/ComoJugar'
+import { GuiaBots } from './pages/wow/GuiaBots'
 
 function App() {
   return (    
@@ -24,6 +25,7 @@ function App() {
             <Route path="/wow/registro" element={<RegistroWow />} />
             <Route path="/wow/online" element={<OnlineWow />} />
             <Route path="/wow/como_jugar" element={<ComoJugar />} />
+            <Route path="/wow/guia_bots" element={<GuiaBots />} />
           </Route>
       </Routes>
     </Router>

@@ -13,19 +13,24 @@ export const Submenu = () => {
             </div>
             <div className='row d-flex justify-content-center rounded mt-2 w-75 ms-auto me-auto' id='submenuWow'>
                 <div className='col-md-12 d-flex justify-content-center gap-2'>
-                    <div className='charsOnline' id='InicioWow'>
+                    <div className='InicioWow' id='InicioWow'>
                         <Link to="/wow">
-                        <button className='btn btn-outline-primary'>Inicio</button>
+                            <button className='btn btn-outline-primary'>Inicio</button>
                         </Link>
                     </div>
                     <div className='charsOnline' id='charsOnline'>
                         <Link to="/wow/online">
-                        <button className='btn btn-outline-primary'>Jugadores Online</button>
+                            <button className='btn btn-outline-primary'>Jugadores Online</button>
                         </Link>
                     </div>
-                    <div className='charsOnline' id='comoJugar'>
+                    <div className='comoJugar' id='comoJugar'>
                         <Link to="/wow/como_jugar">
-                        <button className='btn btn-outline-primary'>Como Jugar?</button>
+                            <button className='btn btn-outline-primary'>Cómo Jugar?</button>
+                        </Link>
+                    </div>
+                    <div className='guiaBots' id='guiaBots'>
+                        <Link to="/wow/guia_bots">
+                            <button className='btn btn-outline-primary'>Guía Bots</button>
                         </Link>
                     </div>
                     <div className='descargaCliente' id='descargaCliente'>
@@ -33,7 +38,7 @@ export const Submenu = () => {
                     </div>
                     <div className='crearCuenta' id='crearCuenta'>
                         <Link to="/wow/registro">
-                        <button className='btn btn-outline-primary'>Crear cuenta</button>
+                            <button className='btn btn-outline-primary'>Crear cuenta</button>
                         </Link>
                     </div>
                 </div>
