@@ -56,14 +56,18 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `category_id` int NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT (now()),
   `visible` bit(1) NOT NULL DEFAULT (1),
+  `main_page` bit(1) NOT NULL DEFAULT (0),
   PRIMARY KEY (`id`),
   KEY `FK_posts_users` (`author_id`),
   KEY `FK_posts_post_categories` (`category_id`) USING BTREE,
   CONSTRAINT `FK_posts_post_categories` FOREIGN KEY (`category_id`) REFERENCES `post_categories` (`id`),
   CONSTRAINT `FK_posts_users` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.posts: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.posts: ~2 rows (aproximadamente)
+INSERT IGNORE INTO `posts` (`id`, `title`, `content`, `author_id`, `category_id`, `created_at`, `visible`, `main_page`) VALUES
+	(1, 'Portal de El Confín Gaming', 'En el portal de El Confín Gaming vas a encontrar todas las novedades de la comunidad.', 1, 1, '2025-01-31 13:45:43', b'1', b'1'),
+	(2, 'Servidor World of Warcraft', 'Ya esta disponible nuestro servidor World of Warcraft 3.3.5a Wrath of the Lych King. Te esperamos!', 1, 2, '2025-01-31 14:36:52', b'1', b'0');
 
 -- Volcando estructura para tabla confin_web.post_categories
 CREATE TABLE IF NOT EXISTS `post_categories` (
@@ -73,14 +77,10 @@ CREATE TABLE IF NOT EXISTS `post_categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
--- Volcando datos para la tabla confin_web.post_categories: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla confin_web.post_categories: ~2 rows (aproximadamente)
 INSERT IGNORE INTO `post_categories` (`id`, `name`, `description`) VALUES
 	(1, 'novedades', 'novedades de el confin'),
-	(2, 'avisos', 'avisos de el confin'),
-	(3, 'historias', 'historias de el confin'),
-	(4, 'wow_novedades', 'novedades wow'),
-	(5, 'wow_avisos', 'avisos wow'),
-	(6, 'wow_historias', 'historias wow');
+	(2, 'wow_novedades', 'novedades wow');
 
 -- Volcando estructura para tabla confin_web.roles
 CREATE TABLE IF NOT EXISTS `roles` (
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
 -- Volcando datos para la tabla confin_web.roles: ~3 rows (aproximadamente)
 INSERT IGNORE INTO `roles` (`id`, `name`) VALUES
 	(1, 'admin'),
-	(2, 'moderador'),
+	(2, 'cm'),
 	(3, 'usuario');
 
 -- Volcando estructura para tabla confin_web.users
@@ -115,8 +115,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 -- Volcando datos para la tabla confin_web.users: ~2 rows (aproximadamente)
 INSERT IGNORE INTO `users` (`id`, `username`, `email`, `password`, `online`, `created_at`, `role`, `banned`, `banned_at`) VALUES
-	(1, 'jeFFFFFFFx', 'jorgefemenia@gmail.com', _binary 0xac8c7d135985254b6bac3520720d09e954892b68cac6cedddb5804d81f9187fb, 0, '2025-01-28 23:27:27', 1, b'0', NULL),
-	(4, 'admin', 'jefponja@gmail.com', _binary 0x94d9ecadba85b97ae982b69cb8235d71446b27523d80d654f09e003022b36bb7, 0, '2025-01-30 23:08:54', 3, b'0', NULL);
+	(1, 'admin', 'jorgefemenia@gmail.com', _binary 0x94d9ecadba85b97ae982b69cb8235d71446b27523d80d654f09e003022b36bb7, 0, '2025-01-28 23:08:54', 1, b'0', NULL),
+	(2, 'jeFFFFFFFx', 'jefponja@gmail.com', _binary 0xac8c7d135985254b6bac3520720d09e954892b68cac6cedddb5804d81f9187fb, 0, '2025-01-28 23:27:27', 1, b'0', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
