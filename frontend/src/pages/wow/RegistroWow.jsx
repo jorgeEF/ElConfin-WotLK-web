@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Submenu } from '../../components/wow/Submenu'
 
 export const RegistroWow = () => {
   const [username, setUsername] = useState('');
@@ -51,13 +52,7 @@ export const RegistroWow = () => {
 
   return (
     <div className="container bg-light mt-5 p-5" id='registro'>
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-12">
-          <span className="badge text-bg-primary w-100 fs-3 p-5">
-            El Confín: World of Warcraft
-          </span>
-        </div>
-      </div>      
+      <Submenu />
       <div className="card shadow mt-5 w-50 ms-auto me-auto">
         <div className="card-body">
           <h3 className="card-title text-center">Creación de cuenta</h3>
@@ -100,15 +95,11 @@ export const RegistroWow = () => {
             </div>
             {okMessage && <div className="alert alert-success">{okMessage}</div>}
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-            <div className='botones d-flex gap-2'>
-              <Link to="/wow">
-                <button className='btn btn-secondary'>Volver</button>
-              </Link>
+            <div className='botones d-flex'>              
               <button type="submit" className="btn btn-primary ms-auto me-1">
                 Crear cuenta
               </button>
             </div>
-
           </form>
         </div>
       </div>

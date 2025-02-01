@@ -57,6 +57,25 @@ export const getAllPosts = async () => {
     }
 };
 
+// Obtener todos los posts
+export const getAllPostsCategoryId = async (id) => {
+    try {
+        const query = 'SELECT * FROM confin_web.posts WHERE category_id = ? ORDER BY created_at DESC';
+        const result = await new Promise((resolve, reject) => {
+            db.query(query, [id], (err, res) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(res);
+                }
+            });
+        });
+        return result;
+    } catch (error) {
+        throw new Error('Error al obtener los posts: ' + error.message);
+    }
+};
+
 // Obtener un post por ID
 export const getPostById = async (id) => {
     try {

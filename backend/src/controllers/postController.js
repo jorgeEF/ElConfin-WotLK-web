@@ -28,6 +28,16 @@ export const getAllPost = async (req, res) => {
     }
 };
 
+// Obtener todos los posts de una categoria
+export const getAllPostCategory = async (req, res) => {
+    try {        
+        const posts = await postService.getAllPostsCategoryId(req.params.id);
+        res.status(200).json(posts);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener los posts', error: error.message });
+    }
+};
+
 // Obtener un post por ID
 export const getPost = async (req, res) => {
     try {

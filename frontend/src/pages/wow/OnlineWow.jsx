@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { Submenu } from '../../components/wow/Submenu'
 
 export const OnlineWow = () => {
   const [charsOnline, setCharsOnline] = useState([]);
@@ -78,23 +79,21 @@ export const OnlineWow = () => {
 
   return (
     <div className="container bg-light text-center mt-5 p-5 border rounded-1" id="OnlineWow">
-      <div className="row d-flex justify-content-center">
-        <div className="col-md-12">
-          <span className="badge text-bg-primary w-100 fs-3 p-5">
-            El Confín: World of Warcraft
-          </span>
-        </div>
-      </div>
+      <Submenu />
 
       <div className="row d-flex justify-content-center mt-3">
         <div className="col-md-12">
           <div className="row">
             <div className="col-12 d-flex gap-2 justify-content-center">              
-              <button type="button" className="btn btn-outline-primary">
-                Jugadores Online <span className="badge text-bg-primary">{charsOnline.length}</span>
+              <button type="button" className="btn btn-sm btn-outline-primary">
+                Jugadores <span className="badge text-bg-primary">{charsOnline.length}</span>
               </button>
-              <button type="button" className="btn btn-outline-primary">
-                Bots Online <span className="badge text-bg-primary">{charsCountOnline.count - charsOnline.length}</span>
+              <button type="button" className="btn btn-sm btn-outline-primary">
+                Bots <span className="badge text-bg-primary">
+                  {isNaN(charsCountOnline.count - charsOnline.length) 
+                    ? charsCountOnline.count 
+                    : charsCountOnline.count - charsOnline.length}
+                </span>
               </button>
             </div>            
           </div>
@@ -177,14 +176,7 @@ export const OnlineWow = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="row">
-            <div className="col-12 d-flex justify-content-start">
-              <Link to="/wow">
-                <button className="btn btn-secondary">Volver</button>
-              </Link>
-            </div>
-      </div>
+      </div>      
     </div>
   );
 };

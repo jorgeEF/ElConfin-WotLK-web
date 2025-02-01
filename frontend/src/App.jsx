@@ -8,6 +8,7 @@ import { Perfil } from './pages/user/Perfil'
 import { InicioWow } from './pages/wow/InicioWow'
 import { RegistroWow } from './pages/wow/RegistroWow'
 import { OnlineWow } from './pages/wow/OnlineWow'
+import { ComoJugar } from './pages/wow/ComoJugar'
 
 function App() {
   return (    
@@ -22,6 +23,7 @@ function App() {
             <Route path="/wow" element={<InicioWow />} />
             <Route path="/wow/registro" element={<RegistroWow />} />
             <Route path="/wow/online" element={<OnlineWow />} />
+            <Route path="/wow/como_jugar" element={<ComoJugar />} />
           </Route>
       </Routes>
     </Router>
