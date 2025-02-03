@@ -26,6 +26,9 @@ Ejecutar:
 Agregar:  
 `@reboot sleep 30; /bin/bash /home/ruta/a/linux_launch_web.sh`
 
+si se levanta el front en nginx, levantar solo el back:  
+`@reboot sleep 30; /bin/bash /home/ruta/a/run_backend.sh`
+
 Windows:  
 Agregar `win_launch_web.bat` a inicio.
 
@@ -34,7 +37,6 @@ Windows: 8080 y 3000
 Linux:  
 `sudo ufw allow 8080`  
 `sudo ufw allow 3000`
-
 
 ### Nginx
 
