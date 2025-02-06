@@ -24,7 +24,7 @@ export const RegistroWow = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ username, email, password, captchaToken }),
       });
 
       // Intentamos parsear la respuesta solo si es exitosa
@@ -104,7 +104,7 @@ export const RegistroWow = () => {
                 onChange={(token) => setCaptchaToken(token)}
               />
             </div>
-            
+
             {okMessage && <div className="alert alert-success">{okMessage}</div>}
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <div className='botones d-flex'>              

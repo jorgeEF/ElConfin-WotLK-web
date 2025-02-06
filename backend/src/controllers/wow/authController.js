@@ -2,9 +2,9 @@ import { registerUser, loginUser, onlineUsers, onlineUsersAndBots } from '../../
 
 // Registrar usuario
 export const register = async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, captchaToken } = req.body;
 
-  if (!username || !password || !email) {
+  if (!username || !password || !email || !captchaToken) {
     return res.status(400).json({ message: "Faltan datos necesarios." });
   }
 
@@ -24,7 +24,7 @@ export const register = async (req, res) => {
     }
 
     // 2️⃣ Si el CAPTCHA es válido, continuar con el registro
-    
+
     const result = await registerUser(username, password, email);
     res.status(200).json({ message: "Cuenta registrada con éxito.", user: result });
   } catch (error) {
