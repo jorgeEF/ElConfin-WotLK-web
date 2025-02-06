@@ -31,10 +31,11 @@ function calculateVerifier(salt, h1) {
   const result = modularExponentiation(gBigInt, h2Int, NBigInt);
 
   const resultBuffer = Buffer.from(result.toString(16), 'hex');
-  let verifierBuffer = resultBuffer.reverse();
-  while (verifierBuffer.length < 32) {
-    verifierBuffer.push(0);
+  let verifierArray = Array.from(resultBuffer).reverse(); // Convierte el buffer a array y lo invierte
+  while (verifierArray.length < 32) {
+    verifierArray.push(0);
   }
+  const verifierBuffer = Buffer.from(verifierArray); // Convierte de vuelta a Buffer
   return Buffer.from(verifierBuffer);
 }
 
