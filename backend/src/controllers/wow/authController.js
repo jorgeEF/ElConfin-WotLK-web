@@ -9,6 +9,22 @@ export const register = async (req, res) => {
   }
 
   try {
+    // 1️⃣ Validar reCAPTCHA con Google
+    const RECAPTCHA_SECRET_KEY = process.env.RECAPTCHA_SECRET_KEY;
+    const recaptchaResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
+    });
+
+    const recaptchaData = await recaptchaResponse.json();
+
+    if (!recaptchaData.success) {
+      return res.status(400).json({ message: "Verificación de reCAPTCHA fallida." });
+    }
+
+    // 2️⃣ Si el CAPTCHA es válido, continuar con el registro
+    
     const result = await registerUser(username, password, email);
     res.status(200).json({ message: "Cuenta registrada con éxito.", user: result });
   } catch (error) {

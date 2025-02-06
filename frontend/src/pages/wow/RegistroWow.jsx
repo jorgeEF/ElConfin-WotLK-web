@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Submenu } from '../../components/wow/Submenu'
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export const RegistroWow = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [captchaToken, setCaptchaToken] = useState(null);
   const [okMessage, setOkMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
   // URL del backend
   const API_URL = import.meta.env.VITE_API_URL;
+  const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,6 +96,15 @@ export const RegistroWow = () => {
                 required
               />
             </div>
+
+            {/* reCAPTCHA */}
+            <div className="mb-3">
+              <ReCAPTCHA
+                sitekey={RECAPTCHA_SITE_KEY}
+                onChange={(token) => setCaptchaToken(token)}
+              />
+            </div>
+            
             {okMessage && <div className="alert alert-success">{okMessage}</div>}
             {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
             <div className='botones d-flex'>              
