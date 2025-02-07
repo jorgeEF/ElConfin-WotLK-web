@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Configuración
+USER="confin"
+PASSWORD="confin"
+HOST="127.0.0.1"
+script_dir=$(dirname "$(realpath "$0")")
+
+# Fecha actual para la carpeta de backup
+DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+
+# Carpeta de backups por fecha
+BACKUP_DIR="$script_dir/backup_db/$DATE"
+
+# Crear la carpeta si no existe
+mkdir -p "$BACKUP_DIR"
+
+# Bases de datos a respaldar
+DATABASES=("confin_web")
+
+# Realizar el backup y comprimir
+for DB in "${DATABASES[@]}"; do
+    echo "Haciendo backup de la base de datos $DB..."
+    mysqldump -u "$USER" -p"$PASSWORD" "$DB" | gzip > "$BACKUP_DIR/${DB}.sql.gz"
+    if [ $? -eq 0 ]; then
+        echo "Backup de $DB completado y guardado en $BACKUP_DIR/${DB}.sql.gz"
+    else
+        echo "Error al realizar el backup de $DB."
+    fi
+done
+
+echo "Respaldos completados."
