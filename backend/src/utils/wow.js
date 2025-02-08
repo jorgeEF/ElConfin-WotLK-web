@@ -20,8 +20,8 @@ export const RaceEnum = {
     4: "Elfo de la Noche",
     5: "No-Muerto",
     6: "Tauren",
-    8: "Gnomo",
-    9: "Trol",
+    7: "Gnomo",
+    8: "Trol",
     10: "Elfo de Sangre",
     11: "Draenei",
 };
