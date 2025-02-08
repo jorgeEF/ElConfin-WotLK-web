@@ -2342,8 +2342,8 @@ export const ZoneEnum = {
 }
 
 export const getFactionByRace = (race) => {
-    const allianceRaces = [1, 3, 4, 8, 11]; // Humanos, Enanos, Elfos de la Noche, Gnomos, Draenei
-    const hordeRaces = [2, 5, 6, 9, 10]; // Orcos, No Muertos, Tauren, Trolls, Elfos de Sangre
+    const allianceRaces = [1, 3, 4, 7, 11]; // Humanos, Enanos, Elfos de la Noche, Gnomos, Draenei
+    const hordeRaces = [2, 5, 6, 8, 10]; // Orcos, No Muertos, Tauren, Trolls, Elfos de Sangre
 
     if (allianceRaces.includes(race)) {
         return FactionEnum.ALIANZA;
