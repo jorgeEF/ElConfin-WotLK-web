@@ -11,37 +11,37 @@ export const OnlineWow = () => {
 
   const API_URL = import.meta.env.VITE_API_URL;  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [charsResponse, charsCountResponse] = await Promise.all([
-          fetch(`${API_URL}/api/wow/status/online_users_chars`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }),
-          fetch(`${API_URL}/api/wow/status/online_count`, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" },
-          }),
-        ]);
-  
-        if (!charsResponse.ok || !charsCountResponse.ok) {
-          throw new Error("Error al obtener los datos del servidor.");
-        }
-  
-        const charsData = await charsResponse.json();
-        const charsCountData = await charsCountResponse.json();
-  
-        setCharsOnline(charsData);
-        setCharsCountOnline(charsCountData);
-      } catch (error) {
-        console.error("Error en la conexión con el servidor:", error);
-        setErrorMessage("Error en la conexión con el servidor.");
-      }
-    };
-  
+  useEffect(() => {  
     fetchData();
   }, [API_URL]);
+
+  const fetchData = async () => {
+    try {
+      const [charsResponse, charsCountResponse] = await Promise.all([
+        fetch(`${API_URL}/api/wow/status/online_users_chars`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }),
+        fetch(`${API_URL}/api/wow/status/online_count`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        }),
+      ]);
+
+      if (!charsResponse.ok || !charsCountResponse.ok) {
+        throw new Error("Error al obtener los datos del servidor.");
+      }
+
+      const charsData = await charsResponse.json();
+      const charsCountData = await charsCountResponse.json();
+
+      setCharsOnline(charsData);
+      setCharsCountOnline(charsCountData);
+    } catch (error) {
+      console.error("Error en la conexión con el servidor:", error);
+      setErrorMessage("Error en la conexión con el servidor.");
+    }
+  };
 
   // Calcular datos para la página actual
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -95,6 +95,11 @@ export const OnlineWow = () => {
                     : charsCountOnline.count - charsOnline.length}
                 </span>
               </button>
+              <button 
+                onClick={fetchData} 
+                className="btn btn-sm btn-outline-primary">
+                Actualizar lista
+              </button>
             </div>            
           </div>
           {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
@@ -103,7 +108,7 @@ export const OnlineWow = () => {
               {!errorMessage && charsOnline.length > 0 ? (
                 <>
                   <table className="table table-sm table-borderless table-hover">
-                    <thead class="table-primary">
+                    <thead className="table-primary">
                       <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Clase</th>
