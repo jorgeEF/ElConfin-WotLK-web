@@ -122,9 +122,30 @@ export const OnlineWow = () => {
                       {currentItems.map((char, index) => (
                         <tr key={index}>
                           <th scope="row">{char.name}</th>
-                          <td>{char.className}</td>
-                          <td>{char.raceName}</td>
-                          <td>{char.faction}</td>                          
+                          <td>
+                            <img
+                              src={`/wow/clase/${char.class}.gif`}
+                              alt={char.className}
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                            {/* {char.className} */}
+                          </td>
+                          <td>
+                            <img
+                              src={`/wow/raza/${char.race}-${char.gender}.gif`}
+                              alt={`${char.raceName}`}
+                              style={{ width: "18px", height: "18px" }}
+                            />
+                            {/* {char.raceName} */}
+                          </td>
+                          <td>
+                            <img
+                              src={`/wow/faccion/${char.faction.toLowerCase()}.png`}
+                              alt={char.faction}
+                              style={{ width: "19px", height: "25px" }}
+                            />
+                            {/* {char.faction} */}
+                          </td>
                           <td>{char.level}</td>
                           <td>{char.zoneName}</td>
                         </tr>
