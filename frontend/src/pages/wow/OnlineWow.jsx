@@ -124,19 +124,19 @@ export const OnlineWow = () => {
                           <th scope="row">{char.name}</th>
                           <td>
                             <img
-                              src={`/wow/clase/${char.class}.gif`}
+                              src={`/wow/clase/${char.class}.png`}
                               title={char.className}
                               alt={char.className}
-                              style={{ width: "18px", height: "18px" }}
+                              style={{ width: "32px", height: "32px" }}
                             />
                             {/* {char.className} */}
                           </td>
                           <td>
                             <img
-                              src={`/wow/raza/${char.race}-${char.gender}.gif`}
+                              src={`/wow/raza/${char.race}-${char.gender}.png`}
                               title={char.raceName}
                               alt={`${char.raceName}`}
-                              style={{ width: "18px", height: "18px" }}
+                              style={{ width: "32px", height: "32px" }}
                             />
                             {/* {char.raceName} */}
                           </td>
@@ -145,7 +145,7 @@ export const OnlineWow = () => {
                               src={`/wow/faccion/${char.faction.toLowerCase()}.png`}
                               title={char.faction}
                               alt={char.faction}
-                              style={{ width: "19px", height: "25px" }}
+                              style={{ width: "32px", height: "32px" }}
                             />
                             {/* {char.faction} */}
                           </td>

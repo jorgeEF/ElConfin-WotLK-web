@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Submenu } from '../../components/wow/Submenu'
+import DOMPurify from 'dompurify';
 
 export const InicioWow = () => {
   const [novedadesWow, setNovedadesWow] = useState([]);
@@ -60,7 +61,7 @@ export const InicioWow = () => {
                 </div>
                 <div className="card-body">
                   <h5 className="card-title">{novedad.title}</h5>
-                  <p className="card-text mt-2">{novedad.content}</p>
+                  <p className="card-text mt-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(novedad.content) }} />
                   {/* <a href="#" className="card-link">Comentarios</a> */}
                   {/* <a href="#" className="card-link">Me gusta</a> */}
                 </div>

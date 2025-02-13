@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/AuthContext";
+import ReactQuill from 'react-quill';
+import DOMPurify from 'dompurify';
+import 'react-quill/dist/quill.snow.css';
 
 export const Publicar = () => {    
     const [title, setTitle] = useState('');
@@ -36,13 +39,16 @@ export const Publicar = () => {
         setOkMessage('');
         setErrorMessage('');
 
+        // Sanitizar el contenido con DOMPurify antes de enviarlo
+        const sanitizedContent = DOMPurify.sanitize(content);
+
         try {
             const response = await fetch(`${API_URL}/api/post`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({                    
                     title,
-                    content,
+                    content: sanitizedContent,  // Enviar el contenido sanitizado
                     author_id: user.id,  // Se asigna directamente
                     category_id,
                     visible: 1,
@@ -89,13 +95,13 @@ export const Publicar = () => {
                         </div>
                         <div className="mb-3">
                             <label htmlFor="content" className="form-label">Contenido</label>
-                            <textarea 
-                                className="form-control"
+                            {/* Reemplazar textarea por React Quill */}
+                            <ReactQuill 
                                 id="content"
-                                rows="3"
                                 value={content}
-                                onChange={(e) => setContent(e.target.value)}
-                                placeholder="Ingresa el contenido..." 
+                                onChange={setContent}
+                                placeholder="Ingresa el contenido..."
+                                theme="snow"
                                 required
                             />
                         </div>
