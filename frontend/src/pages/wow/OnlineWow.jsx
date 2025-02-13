@@ -8,6 +8,7 @@ export const OnlineWow = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(12); // Elementos por página
   const [errorMessage, setErrorMessage] = useState("");
+  const [isFetching, setIsFetching] = useState(false);
 
   const API_URL = import.meta.env.VITE_API_URL;  
 
@@ -16,6 +17,10 @@ export const OnlineWow = () => {
   }, [API_URL]);
 
   const fetchData = async () => {
+
+    if (isFetching) return; 
+    setIsFetching(true);
+
     try {
       const [charsResponse, charsCountResponse] = await Promise.all([
         fetch(`${API_URL}/api/wow/status/online_users_chars`, {
@@ -41,6 +46,8 @@ export const OnlineWow = () => {
       console.error("Error en la conexión con el servidor:", error);
       setErrorMessage("Error en la conexión con el servidor.");
     }
+
+    setTimeout(() => setIsFetching(false), 10000); // tiempo en milisegundos
   };
 
   // Calcular datos para la página actual
@@ -97,10 +104,11 @@ export const OnlineWow = () => {
               </button>
               <button 
                 onClick={fetchData} 
-                className="btn btn-sm btn-outline-primary">
-                Actualizar lista
+                className="btn btn-sm btn-outline-primary"
+                disabled={isFetching} >
+                {isFetching ? "Lista Actualizada" : "Actualizar lista"}
               </button>
-            </div>            
+            </div>
           </div>
           {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
           <div className="row mt-3">

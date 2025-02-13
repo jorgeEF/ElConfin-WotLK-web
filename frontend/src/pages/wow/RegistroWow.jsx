@@ -58,7 +58,7 @@ export const RegistroWow = () => {
       <Submenu />
       <div className="card shadow mt-5 w-50 ms-auto me-auto">
         <div className="card-body">
-          <h3 className="card-title text-center">Creación de cuenta</h3>
+          <h3 className="card-title text-center">Creación de cuenta WoW</h3>
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
               <label htmlFor="username" className="form-label">Usuario</label>
