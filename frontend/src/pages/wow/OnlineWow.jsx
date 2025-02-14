@@ -134,7 +134,7 @@ export const OnlineWow = () => {
                             <img
                               src={`/wow/clase/${char.class}.png`}
                               title={char.className}
-                              alt={char.className}
+                              alt={`${char.className}`}
                               style={{ width: "32px", height: "32px" }}
                             />
                             {/* {char.className} */}
@@ -152,7 +152,7 @@ export const OnlineWow = () => {
                             <img
                               src={`/wow/faccion/${char.faction.toLowerCase()}.png`}
                               title={char.faction}
-                              alt={char.faction}
+                              alt={`${char.faction}`}
                               style={{ width: "32px", height: "32px" }}
                             />
                             {/* {char.faction} */}
