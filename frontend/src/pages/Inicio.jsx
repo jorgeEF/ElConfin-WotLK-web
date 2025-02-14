@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import DOMPurify from 'dompurify';
+import { marked } from 'marked';
 import './Inicio.css';
 
 export const Inicio = () => {    
@@ -74,7 +74,7 @@ export const Inicio = () => {
                   </div>                
                   <div className="card-body">                    
                     <h5 className="card-title">{novedad.title}</h5>                    
-                    <p className="card-text mt-2" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(novedad.content) }} />
+                    <p className="card-text mt-2" dangerouslySetInnerHTML={{ __html: marked(novedad.content) }} />
                     {/* <a href="#" className="card-link">Comentarios</a> */}
                     {/* <a href="#" className="card-link">Me gusta</a> */}
                   </div>
