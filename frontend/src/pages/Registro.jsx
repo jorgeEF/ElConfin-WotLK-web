@@ -53,69 +53,70 @@ export const Registro = () => {
   };
 
   return (
-    <div className="container-fluid d-flex justify-content-center" id='registro'>
-      <div className="card shadow mt-5 w-25">
-        <div className="card-body">
-          <h3 className="card-title text-center">Registro de usuarios</h3>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">Usuario</label>
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Ingresa el nombre de usuario..."
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Ingresa tu email..."
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">Contraseña</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Ingresa una contraseña..."
-                required
-              />
-            </div>
+    // <div className="container-fluid d-flex justify-content-center" id='registro'>
+    //   <div className="card shadow mt-5 w-25">
+    //     <div className="card-body">
+    //       <h3 className="card-title text-center">Registro de usuarios</h3>
+    //       <form onSubmit={handleSubmit}>
+    //         <div className="mb-3">
+    //           <label htmlFor="username" className="form-label">Usuario</label>
+    //           <input
+    //             type="text"
+    //             className="form-control"
+    //             id="username"
+    //             value={username}
+    //             onChange={(e) => setUsername(e.target.value)}
+    //             placeholder="Ingresa el nombre de usuario..."
+    //             required
+    //           />
+    //         </div>
+    //         <div className="mb-3">
+    //           <label htmlFor="email" className="form-label">Email</label>
+    //           <input
+    //             type="email"
+    //             className="form-control"
+    //             id="email"
+    //             value={email}
+    //             onChange={(e) => setEmail(e.target.value)}
+    //             placeholder="Ingresa tu email..."
+    //             required
+    //           />
+    //         </div>
+    //         <div className="mb-3">
+    //           <label htmlFor="password" className="form-label">Contraseña</label>
+    //           <input
+    //             type="password"
+    //             className="form-control"
+    //             id="password"
+    //             value={password}
+    //             onChange={(e) => setPassword(e.target.value)}
+    //             placeholder="Ingresa una contraseña..."
+    //             required
+    //           />
+    //         </div>
 
-            {/* reCAPTCHA */}
-            <div className="mb-3">
-              <ReCAPTCHA
-                sitekey={RECAPTCHA_SITE_KEY}
-                onChange={(token) => setCaptchaToken(token)}
-              />
-            </div>
+    //         {/* reCAPTCHA */}
+    //         <div className="mb-3">
+    //           <ReCAPTCHA
+    //             sitekey={RECAPTCHA_SITE_KEY}
+    //             onChange={(token) => setCaptchaToken(token)}
+    //           />
+    //         </div>
             
-            {okMessage && <div className="alert alert-success">{okMessage}</div>}
-            {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
-            <div className='botones d-flex justify-content-center gap-5'>
-              <Link to="/">
-                <button className='btn btn-secondary' type="button">Volver</button>
-              </Link>
-              <button type="submit" className="btn btn-primary">
-                Registrarse
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    //         {okMessage && <div className="alert alert-success">{okMessage}</div>}
+    //         {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
+    //         <div className='botones d-flex justify-content-center gap-5'>
+    //           <Link to="/">
+    //             <button className='btn btn-secondary' type="button">Volver</button>
+    //           </Link>
+    //           <button type="submit" className="btn btn-primary">
+    //             Registrarse
+    //           </button>
+    //         </div>
+    //       </form>
+    //     </div>
+    //   </div>
+    // </div> 
+    <><p>Seccion no habilitada</p></>
   );
 };

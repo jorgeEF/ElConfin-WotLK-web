@@ -7,13 +7,15 @@ export const Menu = () => {
   return (
     <nav className="navbar bg-dark" data-bs-theme="dark">
       <div className="container">
-        <div className="col-md-3 ms-3">
-          <Link to="/" className="text-decoration-none">
+        <div className="col-md-9 d-flex justify-content-start ms-3 gap-3">
+          <Link to="/" className="btn btn-outline-primary">
             Inicio
+          </Link>        
+          <Link to="/wow" className="btn btn-primary">
+              World of Warcraft
           </Link>
         </div>
-        <div className="col-md-4"></div>
-        <div className="col-md-4 d-flex justify-content-end me-3">
+        <div className="col-md-2 d-flex justify-content-end me-3">
           {user ? (
             <div className="dropdown">
               <button
@@ -47,7 +49,7 @@ export const Menu = () => {
             </div>
           ) : (
             <Link to="/login">
-              <button className="btn btn-primary">Iniciar sesión</button>
+              <button className="btn btn-outline-primary">Iniciar sesión</button>
             </Link>
           )}
         </div>

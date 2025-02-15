@@ -99,9 +99,9 @@ export const Login = () => {
           </form>
           {errorMessage && <div className="alert alert-danger mt-3">{errorMessage}</div>}
           {okMessage && <div className="alert alert-success mt-3">{okMessage}</div>}
-          <div className='crearCuenta text-center mt-4'>
+          {/* <div className='crearCuenta text-center mt-4'>
             <p>Aún no tienes cuenta? <Link to="/registro">Regístrate!</Link></p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
